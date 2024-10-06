@@ -16,6 +16,7 @@ interface IMain {
 
 /**
  * Компонент главной страницы.
+ * @param {IMain} param - Входные параметры компонента.
  * @returns {JSX.Element}
  */
 export const Main: FC<IMain> = ({ city, offers }): JSX.Element => (
