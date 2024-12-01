@@ -8,34 +8,26 @@ import { Offer } from './pages/Offer';
 import { Error } from './pages/Error';
 import { PrivateRoute } from './components/molecules/PrivateRoute/PrivateRoute';
 
-import { ICard } from './interfaces/components/card.interface';
+import { IOffers } from './interfaces/components/offers.interface';
+
 import { AppRoute } from './emuns/app-route.emun';
 
 /**
- * Интерфейс компонента приложения.
- * @prop {string} city - Город.
- * @prop {ICard[]} offers - Предложения.
- */
-interface IApp {
-  city: string;
-  offers: ICard[];
-}
-
-/**
  * Компонент приложения.
+ * @param {IOffers} param - Входные параметры компонента.
  * @returns {JSX.Element}
  */
-export const App: FC<IApp> = ({ city, offers }): JSX.Element => {
-  const isAuth = false;
+export const App: FC<IOffers> = ({ ...props }): JSX.Element => {
+  const isAuth = true;
 
   return (
     <BrowserRouter>
       <Routes>
-        <Route path={AppRoute.Main} element={<Main city={city} offers={offers} />} />
+        <Route path={AppRoute.Main} element={<Main city={props.city} offers={props.offers} />} />
         <Route path={AppRoute.Login} element={<Login />} />
         <Route path={AppRoute.Favorites} element={
           <PrivateRoute isAuthorized={isAuth}>
-            <Favorites />
+            <Favorites {...props} />
           </PrivateRoute>
         }
         />
