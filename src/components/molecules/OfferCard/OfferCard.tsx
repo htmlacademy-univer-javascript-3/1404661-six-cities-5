@@ -1,14 +1,16 @@
 import { FC } from 'react';
 import classNames from 'classnames';
+import { Link } from 'react-router-dom';
 
-import { ICard } from '../../../interfaces/components/card.interface';
+import { IOfferCard } from '../../../interfaces/components/offer-card.interface';
 
 /**
  * Компонент карточки.
  * @param {ICard} params  - Входные парамтеры компонента.
  * @returns {JSX.Element}
  */
-export const Card: FC<ICard> = ({
+export const OfferCard: FC<IOfferCard> = ({
+  id,
   title,
   type,
   image,
@@ -54,7 +56,7 @@ export const Card: FC<ICard> = ({
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="#">{title}</a>
+          <Link to={`/offer/${id}`}>{title}</Link>
         </h2>
         <p className="place-card__type">{type}</p>
       </div>
@@ -62,4 +64,4 @@ export const Card: FC<ICard> = ({
   );
 };
 
-export default Card;
+export default OfferCard;

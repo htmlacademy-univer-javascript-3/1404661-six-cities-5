@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 
 import { App } from './App';
 
-import { PLACEMENTS, CITY } from './mock/placements';
+import { OFFERS } from './mocks/offers';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -11,6 +11,6 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <App offers={PLACEMENTS} city={CITY} />
+    <App {...OFFERS} />
   </React.StrictMode>
 );

@@ -6,9 +6,12 @@ import { PlacementTypes } from '../../emuns/plecement-types.enum';
  * @prop {string} title - Заголовок.
  * @prop {string} type - Тип.
  * @prop {string} image - Изображение.
- * @prop {string | undefined} isPremium - Является ли премиумом?
+ * @prop {number} price - Цена.
+ * @prop {number} rating - Рейтинг.
+ * @prop {boolean | undefined} inBookmarks - Есть ли в заметках?
+ * @prop {boolean | undefined} isPremium - Является ли премиумом?
  */
-export interface ICard {
+export interface IOfferCard {
   id: number;
   title: string;
   type: PlacementTypes;

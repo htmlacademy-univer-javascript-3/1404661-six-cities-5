@@ -1,25 +1,15 @@
 import { FC } from 'react';
 
-import Card from '../components/molecules/Card/Card';
+import CardsList from '../components/molecules/OffersList/OffersList';
 
-import { ICard } from '../interfaces/components/card.interface';
-
-/**
- * Интерфейс компонента главной страницы.
- * @prop {string} city - Город.
- * @prop {ICard[]} offers - Предложения.
- */
-interface IMain {
-  city: string;
-  offers: ICard[];
-}
+import { IOffers } from '../interfaces/components/offers.interface';
 
 /**
  * Компонент главной страницы.
- * @param {IMain} param - Входные параметры компонента.
+ * @param {IOffers} param - Входные параметры компонента.
  * @returns {JSX.Element}
  */
-export const Main: FC<IMain> = ({ city, offers }): JSX.Element => (
+export const Main: FC<IOffers> = ({ city, offers }): JSX.Element => (
   <div className="page page--gray page--main">
     <header className="header">
       <div className="container">
@@ -108,23 +98,7 @@ export const Main: FC<IMain> = ({ city, offers }): JSX.Element => (
                 <li className="places__option" tabIndex={0}>Top rated first</li>
               </ul>
             </form>
-            <div className="cities__places-list places__list tabs__content">
-              {
-                offers.map((item) => (
-                  <Card
-                    key={item.id}
-                    id={item.id}
-                    title={item.title}
-                    type={item.type}
-                    image={item.image}
-                    price={item.price}
-                    rating={item.rating}
-                    inBookmarks={item.inBookmarks}
-                    isPremium={item.isPremium}
-                  />)
-                )
-              }
-            </div>
+            <CardsList offers={offers} />
           </section>
           <div className="cities__right-section">
             <section className="cities__map map"></section>

@@ -5,5 +5,6 @@
  */
 export enum PlacementTypes {
   Apartment = 'Apartment',
-  Room = 'Room'
+  Room = 'Room',
+  House = 'House'
 }
