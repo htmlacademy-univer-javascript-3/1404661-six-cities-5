@@ -4,7 +4,7 @@ import { FC } from 'react';
  * Компонент формы создания комментария.
  * @returns {JSX.Element}
  */
-export const CreateCommentForm: FC = () => (
+export const CreateCommentForm: FC = (): JSX.Element => (
   <form className="reviews__form form" action="#" method="post">
     <label className="reviews__label form__label" htmlFor="review">Your review</label>
     <div className="reviews__rating-form form__rating">
