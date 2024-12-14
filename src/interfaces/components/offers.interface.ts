@@ -1,3 +1,4 @@
+import { IMapPoint } from '../points.interface';
 import { IOfferCard } from './offer-card.interface';
 
 /**
@@ -6,6 +7,6 @@ import { IOfferCard } from './offer-card.interface';
  * @prop {ICard[]} offers - Предложения.
  */
 export interface IOffers {
-  city: string;
+  city: IMapPoint;
   offers: IOfferCard[];
 }

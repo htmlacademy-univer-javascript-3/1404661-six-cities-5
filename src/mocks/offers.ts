@@ -1,8 +1,16 @@
+import { IOffers } from '../interfaces/components/offers.interface';
 import { PlacementTypes } from '../emuns/plecement-types.enum';
 
-export const OFFERS = {
-  'city': 'Maracle City',
-  'offers': [
+/**
+ * Моковые данные предложений.
+ */
+export const OFFERS: IOffers = {
+  city: {
+    title: 'Maracle City',
+    latitude: 52.4,
+    longitude: 4.9
+  },
+  offers: [
     {
       id: 1,
       title: 'Luxury Apartment in Downtown',
@@ -11,6 +19,10 @@ export const OFFERS = {
       type: PlacementTypes.Apartment,
       isPremium: true,
       image: 'img/apartment-01.jpg',
+      coordinates: {
+        latitude: 52.3909553943508,
+        longitude: 4.85309666406198
+      }
     },
     {
       id: 2,
@@ -20,6 +32,10 @@ export const OFFERS = {
       type: PlacementTypes.Apartment,
       isPremium: false,
       image: 'img/studio-01.jpg',
+      coordinates: {
+        latitude: 52.3609553943508,
+        longitude: 4.85309666406198
+      }
     },
     {
       id: 3,
@@ -29,6 +45,10 @@ export const OFFERS = {
       type: PlacementTypes.Room,
       isPremium: false,
       image: 'img/room.jpg',
+      coordinates: {
+        latitude: 52.3909553943508,
+        longitude: 4.929309666406198
+      }
     },
     {
       id: 4,
@@ -38,6 +58,10 @@ export const OFFERS = {
       type: PlacementTypes.House,
       isPremium: true,
       image: 'img/studio-01.jpg',
+      coordinates: {
+        latitude: 52.3809553943508,
+        longitude: 4.939309666406198
+      }
     },
   ]
 };
