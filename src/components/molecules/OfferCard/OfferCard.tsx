@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 
 import { IOfferCard } from '../../../interfaces/components/offer-card.interface';
 
-
 /**
  * Компонент карточки.
  * @param {ICard} params  - Входные парамтеры компонента.
