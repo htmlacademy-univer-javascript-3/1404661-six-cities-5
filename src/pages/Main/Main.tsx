@@ -4,7 +4,7 @@ import Map from '../../components/organisms/Map/Map';
 import CardsList from '../../components/molecules/OffersList/OffersList';
 
 import { IOffers } from '../../interfaces/components/offers.interface';
-import { IOfferCard } from '../../interfaces/components/offer-card.interface';
+import { IOffer } from '../../interfaces/components/offer.interface';
 
 import './Main.css';
 
@@ -15,14 +15,14 @@ import './Main.css';
  */
 export const Main: FC<IOffers> = ({ city, offers }: IOffers): JSX.Element => {
 
-  const [selectedOffer, setSelectedPoint] = useState<IOfferCard | null>(null);
+  const [selectedOffer, setSelectedPoint] = useState<IOffer | null>(null);
 
   /**
    * Обработчик клика на предложение.
-   * @param {IOfferCard} selectItem - Выбранное предложение.
+   * @param {IOffer} selectItem - Выбранное предложение.
    * @returns void.
    */
-  const onClickOffer = (selectItem: IOfferCard) => {
+  const onClickOffer = (selectItem: IOffer) => {
     setSelectedPoint(selectItem);
   };
 

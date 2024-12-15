@@ -1,5 +1,5 @@
 import { IMapPoint } from '../points.interface';
-import { IOfferCard } from './offer-card.interface';
+import { IOffer } from './offer.interface';
 
 /**
  * Интерфейс предложений.
@@ -8,5 +8,5 @@ import { IOfferCard } from './offer-card.interface';
  */
 export interface IOffers {
   city: IMapPoint;
-  offers: IOfferCard[];
+  offers: IOffer[];
 }

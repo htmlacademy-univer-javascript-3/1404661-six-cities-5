@@ -3,7 +3,7 @@ import { layerGroup, Marker } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
 import { IMapPoint } from '../../../interfaces/points.interface';
-import { IOfferCard } from '../../../interfaces/components/offer-card.interface';
+import { IOffer } from '../../../interfaces/components/offer.interface';
 
 import useMap from '../../../hooks/useMap';
 import { currentCustomIcon, defaultCustomIcon } from '../../../constants/MapsPoint';
@@ -12,12 +12,12 @@ import { currentCustomIcon, defaultCustomIcon } from '../../../constants/MapsPoi
  * Интерфейс компонента карты.
  * @prop {IMapPoint} currentCity - Текущий город.
  * @prop {IOfferCard[]} offers - Пердложения.
- * @prop {IOfferCard | null} selectedOffer - Выбранное предложение.
+ * @prop {IOfferCard | null | undefined} selectedOffer - Выбранное предложение.
  */
 interface IMapProps {
   currentCity: IMapPoint;
-  offers: IOfferCard[];
-  selectedOffer: IOfferCard | null;
+  offers: IOffer[];
+  selectedOffer?: IOffer | null;
 }
 
 /**

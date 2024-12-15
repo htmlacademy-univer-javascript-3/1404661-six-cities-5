@@ -2,16 +2,19 @@ import { FC } from 'react';
 
 import Card from '../OfferCard/OfferCard';
 
-import { IOfferCard } from '../../../interfaces/components/offer-card.interface';
+import { IOffer } from '../../../interfaces/components/offer.interface';
+import classNames from 'classnames';
 
 /**
  * Интерфейс компонента списка карточек преложений.
- * @prop {{(selectedOffer: IOfferCard) => void} | undefined} selectOffer - Функция выбора предложения.
+ * @prop {{(selectedOffer: IOffer) => void} | undefined} selectOffer - Функция выбора предложения.
  * @prop {ICard[] | undefined} offers - Предложения.
+ * @prop {boolean | undefined} isNearPlaces - Предложения рядом?
  */
 export interface IOffersList {
-  selectOffer?: (selectedOffer: IOfferCard) => void;
-  offers?: IOfferCard[];
+  selectOffer?: (selectedOffer: IOffer) => void;
+  offers?: IOffer[];
+  isNearPlaces?: boolean;
 }
 
 /**
@@ -19,8 +22,8 @@ export interface IOffersList {
  * @param {IOffersList} params  - Входные парамтеры компонента.
  * @returns {JSX.Element}
  */
-export const OffersList: FC<IOffersList> = ({ selectOffer, offers }): JSX.Element => (
-  <div className="cities__places-list places__list tabs__content">
+export const OffersList: FC<IOffersList> = ({ selectOffer, offers, isNearPlaces = false }): JSX.Element => (
+  <div className={classNames(isNearPlaces ? 'near-places__list' : 'cities__places-list', 'places__list', !isNearPlaces && 'tabs__content')}>
     {
       offers ? offers.map((item) => (
         <div onMouseDown={() => selectOffer?.(item)} key={item.id}>
@@ -33,6 +36,7 @@ export const OffersList: FC<IOffersList> = ({ selectOffer, offers }): JSX.Elemen
             rating={item.rating}
             inBookmarks={item.inBookmarks}
             isPremium={item.isPremium}
+            isNearPlaces={isNearPlaces}
           />
         </div>)
       ) : null
