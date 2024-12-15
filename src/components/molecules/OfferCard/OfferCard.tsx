@@ -2,14 +2,22 @@ import { FC } from 'react';
 import classNames from 'classnames';
 import { Link } from 'react-router-dom';
 
-import { IOfferCard } from '../../../interfaces/components/offer-card.interface';
+import { IOffer } from '../../../interfaces/components/offer.interface';
 
 /**
- * Компонент карточки.
+ * Интерфейс компонента карточки предложения.
+ * @prop {boolean | undefined} isNearPlaces - Предложения рядом?
+ */
+interface IOfferProps extends IOffer {
+  isNearPlaces?: boolean;
+}
+
+/**
+ * Компонент карточки предложения.
  * @param {ICard} params  - Входные парамтеры компонента.
  * @returns {JSX.Element}
  */
-export const OfferCard: FC<IOfferCard> = ({
+export const OfferCard: FC<IOfferProps> = ({
   id,
   title,
   type,
@@ -17,13 +25,14 @@ export const OfferCard: FC<IOfferCard> = ({
   price,
   rating,
   inBookmarks = false,
-  isPremium = false
+  isPremium = false,
+  isNearPlaces = false
 }): JSX.Element => {
 
   const persentRating = rating * 20;
 
   return (
-    <article className="cities__card place-card">
+    <article className={classNames(isNearPlaces ? 'near-places__card' : 'cities__card', 'place-card')}>
       {
         isPremium ?
           <div className="place-card__mark">
@@ -31,7 +40,7 @@ export const OfferCard: FC<IOfferCard> = ({
           </div> :
           null
       }
-      <div className="cities__image-wrapper place-card__image-wrapper">
+      <div className={classNames(isNearPlaces ? 'near-places__image-wrapper' : 'cities__image-wrapper', 'place-card__image-wrapper')}>
         <a href="#">
           <img className="place-card__image" src={image} width="260" height="200" alt="Place image" />
         </a>

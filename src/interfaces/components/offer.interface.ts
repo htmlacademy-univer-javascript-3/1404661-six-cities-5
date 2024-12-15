@@ -2,7 +2,7 @@ import { PlacementTypes } from '../../emuns/plecement-types.enum';
 import { IMapPoint } from '../points.interface';
 
 /**
- * Интерфейс компонента карточки.
+ * Интерфейс предложения.
  * @prop {number} id - Идентификатор.
  * @prop {string} title - Заголовок.
  * @prop {string} type - Тип.
@@ -13,7 +13,7 @@ import { IMapPoint } from '../points.interface';
  * @prop {boolean | undefined} inBookmarks - Есть ли в заметках?
  * @prop {boolean | undefined} isPremium - Является ли премиумом?
  */
-export interface IOfferCard {
+export interface IOffer {
   id: number;
   title: string;
   type: PlacementTypes;
