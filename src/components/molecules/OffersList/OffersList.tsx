@@ -1,9 +1,9 @@
 import { FC } from 'react';
+import classNames from 'classnames';
 
 import Card from '../OfferCard/OfferCard';
 
 import { IOffer } from '../../../interfaces/components/offer.interface';
-import classNames from 'classnames';
 
 /**
  * Интерфейс компонента списка карточек преложений.
