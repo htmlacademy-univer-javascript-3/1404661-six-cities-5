@@ -2,8 +2,8 @@ import { FC, useEffect, useRef } from 'react';
 import { layerGroup, Marker } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
-import { IMapPoint } from '../../../interfaces/points.interface';
 import { IOffer } from '../../../interfaces/components/offer.interface';
+import { ICity } from '../../../interfaces/city.interface';
 
 import useMap from '../../../hooks/useMap';
 import { currentCustomIcon, defaultCustomIcon } from '../../../constants/MapsPoint';
@@ -11,11 +11,11 @@ import { currentCustomIcon, defaultCustomIcon } from '../../../constants/MapsPoi
 /**
  * Интерфейс компонента карты.
  * @prop {IMapPoint} currentCity - Текущий город.
- * @prop {IOfferCard[]} offers - Пердложения.
- * @prop {IOfferCard | null | undefined} selectedOffer - Выбранное предложение.
+ * @prop { IOffer[]} offers - Пердложения.
+ * @prop {IOffer | null | undefined} selectedOffer - Выбранное предложение.
  */
 interface IMapProps {
-  currentCity: IMapPoint;
+  currentCity: ICity;
   offers: IOffer[];
   selectedOffer?: IOffer | null;
 }
@@ -57,7 +57,7 @@ export const Map: FC<IMapProps> = ({
         map.removeLayer(markerLayer);
       };
     }
-  }, [map, offers, selectedOffer]);
+  }, [map, offers, selectedOffer, currentCity]);
 
   return <div style={{ height: '500px' }} ref={mapRef}></div>;
 };

@@ -1,10 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { Provider } from 'react-redux';
 
 import { App } from './App';
 
-import { OFFERS } from './mocks/offers';
-import { NEAR_BY_OFFERS } from './mocks/nearby-offers';
+import { FAVORITIES_OFFERS } from './mocks/favorities-offers';
+import { store } from './store';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -12,6 +13,8 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <App offers={OFFERS} nearByOffers={NEAR_BY_OFFERS} />
+    <Provider store={store}>
+      <App offers={FAVORITIES_OFFERS} />
+    </Provider>
   </React.StrictMode>
 );

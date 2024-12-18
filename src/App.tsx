@@ -8,18 +8,15 @@ import { Offer } from './pages/Offer';
 import { Error } from './pages/Error';
 import { PrivateRoute } from './components/molecules/PrivateRoute/PrivateRoute';
 
-import { IOffers } from './interfaces/components/offers.interface';
+import { IOffer } from './interfaces/components/offer.interface';
 import { AppRoute } from './emuns/app-route.emun';
-
 
 /**
  * Интерфейс компонента приложения.
- * @prop {IOffers} offers - Предложения.
- * @prop {IOffers} nearByOffers - Ближайшие предложения.
+ * @prop {IOffer[]} offers - Предложения.
  */
 export interface IAppProps {
-  offers: IOffers;
-  nearByOffers: IOffers;
+  offers: IOffer[];
 }
 
 /**
@@ -33,15 +30,15 @@ export const App: FC<IAppProps> = ({ ...props }): JSX.Element => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path={AppRoute.Main} element={<Main city={props.offers.city} offers={props.offers.offers} />} />
+        <Route path={AppRoute.Main} element={<Main />} />
         <Route path={AppRoute.Login} element={<Login />} />
         <Route path={AppRoute.Favorites} element={
           <PrivateRoute isAuthorized={isAuth}>
-            <Favorites {...props.offers} />
+            <Favorites offers={props.offers} />
           </PrivateRoute>
         }
         />
-        <Route path={AppRoute.Offer} element={<Offer nearOffers={props.nearByOffers} />} />
+        <Route path={AppRoute.Offer} element={<Offer />} />
         <Route
           path="*"
           element={<Error />}

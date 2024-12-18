@@ -37,6 +37,7 @@ export const OffersList: FC<IOffersList> = ({ selectOffer, offers, isNearPlaces 
             inBookmarks={item.inBookmarks}
             isPremium={item.isPremium}
             isNearPlaces={isNearPlaces}
+            city={item.city}
           />
         </div>)
       ) : null

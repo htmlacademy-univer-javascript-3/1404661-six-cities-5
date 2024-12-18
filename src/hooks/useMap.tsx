@@ -1,7 +1,7 @@
 import { useEffect, useState, MutableRefObject, useRef } from 'react';
 import { Map, TileLayer } from 'leaflet';
 
-import { IMapPoint } from '../interfaces/points.interface';
+import { ICity } from '../interfaces/city.interface';
 
 /**
  * Хук для инициализации и управления экземпляром карты Leaflet.
@@ -11,7 +11,7 @@ import { IMapPoint } from '../interfaces/points.interface';
  */
 function useMap(
   mapRef: MutableRefObject<HTMLElement | null>,
-  mapPoint: IMapPoint
+  mapPoint: ICity
 ): Map | null {
   const [map, setMap] = useState<Map | null>(null);
 
