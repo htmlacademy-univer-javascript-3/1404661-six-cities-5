@@ -13,7 +13,7 @@ import { AppRoute } from './emuns/app-route.emun';
 
 /**
  * Интерфейс компонента приложения.
- * @prop {IOffers} offers - Предложения.
+ * @prop {IOffer[]} offers - Предложения.
  */
 export interface IAppProps {
   offers: IOffer[];

@@ -11,8 +11,8 @@ import { currentCustomIcon, defaultCustomIcon } from '../../../constants/MapsPoi
 /**
  * Интерфейс компонента карты.
  * @prop {IMapPoint} currentCity - Текущий город.
- * @prop {IOfferCard[]} offers - Пердложения.
- * @prop {IOfferCard | null | undefined} selectedOffer - Выбранное предложение.
+ * @prop { IOffer[]} offers - Пердложения.
+ * @prop {IOffer | null | undefined} selectedOffer - Выбранное предложение.
  */
 interface IMapProps {
   currentCity: ICity;

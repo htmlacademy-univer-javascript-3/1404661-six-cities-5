@@ -26,7 +26,7 @@ function useMap(
           lng: mapPoint.longitude
         },
         zoom: 10
-      },);
+      });
 
       const layer = new TileLayer(
         'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',

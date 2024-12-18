@@ -5,9 +5,9 @@ import { useAppDispatch, useAppSelector } from '../../../store/hooks';
 
 /**
  * Компонент списка городов.
- * @returns
+ * @returns {JSX.Element}
  */
-export const CityList = () => {
+export const CityList = (): JSX.Element => {
   const currentCity = useAppSelector((state) => state.city);
   const dispatch = useAppDispatch();
 
