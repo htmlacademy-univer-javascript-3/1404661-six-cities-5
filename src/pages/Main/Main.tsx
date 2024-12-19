@@ -1,16 +1,16 @@
 import { FC, useMemo, useState } from 'react';
 
 import Map from '../../components/organisms/Map/Map';
+import { Filter } from '../../components/organisms/Filter/Filter';
 import { OffersList } from '../../components/molecules/OffersList/OffersList';
 import { CityList } from '../../components/molecules/CityList/CityList';
 
 import { IOffer } from '../../interfaces/components/offer.interface';
 
 import { useAppSelector } from '../../store/hooks';
+import { FilterTypes } from '../../constants/filters';
 
 import './Main.css';
-import { FilterTypes } from '../../constants/filters';
-import { Filter } from '../../components/organisms/Filter/Filter';
 
 /**
  * Компонент главной страницы.
@@ -26,10 +26,17 @@ export const Main: FC = (): JSX.Element => {
 
   const currentOffers = useAppSelector((state) => state.offers);
 
-  const onFilterChange = (filter: FilterTypes) => {
+  /**
+   * Изменение фильра.
+   * @param {FilterTypes} filter - Тип фильтра.
+   */
+  const onFilterChange = (filter: FilterTypes): void => {
     setCurrentFilter(filter);
   };
 
+  /**
+   * Сортированные предложения.
+   */
   const sortedOffers = useMemo(() => {
     switch (currentFilter) {
       case FilterTypes.topRated:
