@@ -12,7 +12,7 @@ import { IOffer } from '../../../interfaces/components/offer.interface';
  * @prop {boolean | undefined} isNearPlaces - Предложения рядом?
  */
 export interface IOffersList {
-  selectOffer?: (selectedOffer: IOffer) => void;
+  selectOffer?: (selectedOffer: IOffer | null) => void;
   offers?: IOffer[];
   isNearPlaces?: boolean;
 }
@@ -26,7 +26,11 @@ export const OffersList: FC<IOffersList> = ({ selectOffer, offers, isNearPlaces 
   <div className={classNames(isNearPlaces ? 'near-places__list' : 'cities__places-list', 'places__list', !isNearPlaces && 'tabs__content')}>
     {
       offers ? offers.map((item) => (
-        <div onMouseDown={() => selectOffer?.(item)} key={item.id}>
+        <div
+          onMouseEnter={() => selectOffer?.(item)}
+          onMouseLeave={() => selectOffer?.(null)}
+          key={item.id}
+        >
           <Card
             id={item.id}
             title={item.title}
