@@ -4,6 +4,7 @@ import Map from '../../components/organisms/Map/Map';
 import { Filter } from '../../components/organisms/Filter/Filter';
 import { OffersList } from '../../components/molecules/OffersList/OffersList';
 import { CityList } from '../../components/molecules/CityList/CityList';
+import { Spinner } from '../../components/atoms/Spinner/Spinner';
 
 import { IOffer } from '../../interfaces/components/offer.interface';
 
@@ -25,6 +26,8 @@ export const Main: FC = (): JSX.Element => {
   const currentCity = useAppSelector((state) => state.city);
 
   const currentOffers = useAppSelector((state) => state.offers);
+
+  const isLoading = useAppSelector((state) => state.isOffersDataLoading);
 
   /**
    * Изменение фильра.
@@ -103,7 +106,7 @@ export const Main: FC = (): JSX.Element => {
               <h2 className="visually-hidden">Places</h2>
               <b className="places__found">{currentOffers?.length} places to stay in {currentCity?.title}</b>
               <Filter currentFilter={currentFilter} onChange={onFilterChange} />
-              <OffersList offers={sortedOffers} selectOffer={onClickOffer} />
+              {isLoading ? <Spinner /> : <OffersList offers={sortedOffers} selectOffer={onClickOffer} />}
             </section>
             <div className="cities__right-section">
               <section className="cities__map map">

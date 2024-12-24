@@ -1,7 +1,7 @@
 import { useEffect, useState, MutableRefObject, useRef } from 'react';
-import { Map, TileLayer } from 'leaflet';
+import { LatLng, Map, TileLayer } from 'leaflet';
 
-import { ICity } from '../interfaces/city.interface';
+import { IMapPoint } from '../interfaces/points.interface';
 
 /**
  * Хук для инициализации и управления экземпляром карты Leaflet.
@@ -11,21 +11,20 @@ import { ICity } from '../interfaces/city.interface';
  */
 function useMap(
   mapRef: MutableRefObject<HTMLElement | null>,
-  mapPoint: ICity
+  mapPoint: IMapPoint
 ): Map | null {
   const [map, setMap] = useState<Map | null>(null);
 
   const isRenderedRef = useRef<boolean>(false);
 
-  /* Эффектит загрузку карты. */
   useEffect(() => {
     if (mapRef.current !== null && !isRenderedRef.current) {
       const instance = new Map(mapRef.current, {
         center: {
           lat: mapPoint.latitude,
-          lng: mapPoint.longitude
+          lng: mapPoint.longitude,
         },
-        zoom: 10
+        zoom: mapPoint.zoom
       });
 
       const layer = new TileLayer(
@@ -40,8 +39,10 @@ function useMap(
 
       setMap(instance);
       isRenderedRef.current = true;
+    } else if (isRenderedRef.current) {
+      map?.panTo(new LatLng(mapPoint.latitude, mapPoint.longitude));
     }
-  }, [mapRef, mapPoint]);
+  }, [mapRef, mapPoint, map]);
 
   return map;
 }

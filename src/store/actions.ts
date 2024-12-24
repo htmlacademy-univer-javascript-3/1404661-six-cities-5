@@ -2,9 +2,11 @@ import { createAction } from '@reduxjs/toolkit';
 
 import { IOffer } from '../interfaces/components/offer.interface';
 import { ICity } from '../interfaces/city.interface';
+import { Actions } from '../emuns/actions.enum';
 
-export const setCity = createAction<{ city: ICity }>('SET_CITY');
 
-export const setOffers = createAction<{ offers: IOffer[] }>('SET_OFFERS');
+export const changeCity = createAction<ICity>(`${Actions.city}/change`);
 
-export const setNearOffers = createAction<{ nearOffers: IOffer[] }>('SET_NEAR_OFFERS');
+export const getOffers = createAction<IOffer[]>(`${Actions.offers}/fill`);
+
+export const setOffersLoadingStatus = createAction<boolean>(`${Actions.offers}/loading`);

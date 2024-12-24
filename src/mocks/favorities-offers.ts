@@ -1,7 +1,7 @@
 import { IOffer } from '../interfaces/components/offer.interface';
 import { PlacementTypes } from '../emuns/plecement-types.enum';
 
-import { CITIES } from './cities';
+import { CITIES } from '../constants/cities';
 
 /**
  * Моковые данные предложений.
@@ -14,10 +14,11 @@ export const FAVORITIES_OFFERS: IOffer[] = [
     rating: 4.5,
     type: PlacementTypes.Apartment,
     isPremium: false,
-    image: 'img/studio-01.jpg',
-    coordinates: {
+    previewImage: 'img/studio-01.jpg',
+    location: {
       latitude: 52.3609553943508,
-      longitude: 4.85309666406198
+      longitude: 4.85309666406198,
+      zoom: 10
     },
     city: CITIES.Amsterdam
   },
@@ -28,10 +29,11 @@ export const FAVORITIES_OFFERS: IOffer[] = [
     rating: 4.5,
     type: PlacementTypes.Apartment,
     isPremium: false,
-    image: 'img/studio-01.jpg',
-    coordinates: {
+    previewImage: 'img/studio-01.jpg',
+    location: {
       latitude: 52.3609553943508,
-      longitude: 4.85309666406198
+      longitude: 4.85309666406198,
+      zoom: 10
     },
     city: CITIES.Amsterdam
   },
@@ -42,10 +44,11 @@ export const FAVORITIES_OFFERS: IOffer[] = [
     rating: 5.0,
     type: PlacementTypes.House,
     isPremium: true,
-    image: 'img/studio-01.jpg',
-    coordinates: {
+    previewImage: 'img/studio-01.jpg',
+    location: {
       latitude: 52.3809553943508,
-      longitude: 4.939309666406198
+      longitude: 4.939309666406198,
+      zoom: 10
     },
     city: CITIES.Paris
   },
@@ -56,10 +59,11 @@ export const FAVORITIES_OFFERS: IOffer[] = [
     rating: 5.0,
     type: PlacementTypes.House,
     isPremium: true,
-    image: 'img/studio-01.jpg',
-    coordinates: {
+    previewImage: 'img/studio-01.jpg',
+    location: {
       latitude: 52.3809553943508,
-      longitude: 4.939309666406198
+      longitude: 4.939309666406198,
+      zoom: 10
     },
     city: CITIES.Paris
   },

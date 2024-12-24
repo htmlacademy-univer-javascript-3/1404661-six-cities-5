@@ -32,16 +32,17 @@ export const Map: FC<IMapProps> = ({
 }) => {
   const mapRef = useRef(null);
 
-  const map = useMap(mapRef, currentCity);
+  const map = useMap(mapRef, currentCity.location);
 
   /* Эффектит установку иконок на карте. */
   useEffect(() => {
     if (map) {
       const markerLayer = layerGroup().addTo(map);
+
       offers.forEach((offer) => {
         const marker = new Marker({
-          lat: offer?.coordinates?.latitude ?? 0,
-          lng: offer?.coordinates?.longitude ?? 0
+          lat: offer?.location?.latitude ?? 0,
+          lng: offer?.location?.longitude ?? 0
         });
 
         marker

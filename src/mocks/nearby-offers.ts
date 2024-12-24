@@ -1,6 +1,6 @@
 import { IOffer } from '../interfaces/components/offer.interface';
 import { PlacementTypes } from '../emuns/plecement-types.enum';
-import { CITIES } from './cities';
+import { CITIES } from '../constants/cities';
 
 /**
  * Моковые данные предложений.
@@ -12,10 +12,11 @@ export const NEAR_BY_OFFERS: IOffer[] = [
     price: 80,
     rating: 4,
     type: PlacementTypes.Room,
-    image: 'img/room.jpg',
-    coordinates: {
+    previewImage: 'img/room.jpg',
+    location: {
       latitude: 52.3509553943508,
-      longitude: 4.86309666406198
+      longitude: 4.86309666406198,
+      zoom: 10
     },
     city: CITIES.Amsterdam
   },
@@ -25,10 +26,11 @@ export const NEAR_BY_OFFERS: IOffer[] = [
     price: 132,
     rating: 4,
     type: PlacementTypes.Apartment,
-    image: 'img/apartment-02.jpg',
-    coordinates: {
+    previewImage: 'img/apartment-02.jpg',
+    location: {
       latitude: 52.3709553943508,
-      longitude: 4.82309666406198
+      longitude: 4.82309666406198,
+      zoom: 10
     },
     city: CITIES.Amsterdam
   },
@@ -39,10 +41,11 @@ export const NEAR_BY_OFFERS: IOffer[] = [
     rating: 4,
     type: PlacementTypes.Apartment,
     isPremium: true,
-    image: 'img/apartment-03.jpg',
-    coordinates: {
+    previewImage: 'img/apartment-03.jpg',
+    location: {
       latitude: 52.3809553943508,
-      longitude: 4.949309666406198
+      longitude: 4.949309666406198,
+      zoom: 10
     },
     city: CITIES.Paris
   }

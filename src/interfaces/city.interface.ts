@@ -1,8 +1,11 @@
 import { IMapPoint } from './points.interface';
 
 /**
+ * Интерфейс города.
+ * @prop {IMapPoint} location - Координаты.
  * @prop {string | undefined} title - Название.
  */
-export interface ICity extends IMapPoint {
+export interface ICity {
+  location: IMapPoint;
   title: string;
 }
