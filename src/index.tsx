@@ -5,7 +5,10 @@ import { Provider } from 'react-redux';
 import { App } from './App';
 
 import { FAVORITIES_OFFERS } from './mocks/favorities-offers';
+import { fetchOffers } from './store/api-actions.ts';
 import { store } from './store';
+
+store.dispatch(fetchOffers());
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
