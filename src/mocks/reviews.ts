@@ -7,8 +7,9 @@ export const Reviews: IReviewItem[] = [
   {
     id: 1,
     user: {
-      avatar: 'img/avatar-max.jpg',
+      avatarUrl: 'img/avatar-max.jpg',
       name: 'Max - 1',
+      isPro: false
     },
     rating: 4,
     comment: 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.',
@@ -17,8 +18,9 @@ export const Reviews: IReviewItem[] = [
   {
     id: 2,
     user: {
-      avatar: 'img/avatar-max.jpg',
+      avatarUrl: 'img/avatar-max.jpg',
       name: 'Max - 2',
+      isPro: false
     },
     rating: 4,
     comment: 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.',
@@ -27,8 +29,9 @@ export const Reviews: IReviewItem[] = [
   {
     id: 3,
     user: {
-      avatar: 'img/avatar-max.jpg',
+      avatarUrl: 'img/avatar-max.jpg',
       name: 'Max - 3',
+      isPro: false
     },
     rating: 4,
     comment: 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.',
