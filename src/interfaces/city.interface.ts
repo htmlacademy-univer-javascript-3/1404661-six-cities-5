@@ -7,5 +7,5 @@ import { IMapPoint } from './points.interface';
  */
 export interface ICity {
   location: IMapPoint;
-  title: string;
+  name: string;
 }

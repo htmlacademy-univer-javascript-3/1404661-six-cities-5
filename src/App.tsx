@@ -24,26 +24,22 @@ export interface IAppProps {
  * @param {IOffers} param - Входные параметры компонента.
  * @returns {JSX.Element}
  */
-export const App: FC<IAppProps> = ({ ...props }): JSX.Element => {
-  const isAuth = true;
-
-  return (
-    <BrowserRouter>
-      <Routes>
-        <Route path={AppRoute.Main} element={<Main />} />
-        <Route path={AppRoute.Login} element={<Login />} />
-        <Route path={AppRoute.Favorites} element={
-          <PrivateRoute isAuthorized={isAuth}>
-            <Favorites offers={props.offers} />
-          </PrivateRoute>
-        }
-        />
-        <Route path={AppRoute.Offer} element={<Offer />} />
-        <Route
-          path="*"
-          element={<Error />}
-        />
-      </Routes>
-    </BrowserRouter>
-  );
-};
+export const App: FC<IAppProps> = ({ ...props }): JSX.Element => (
+  <BrowserRouter>
+    <Routes>
+      <Route path={AppRoute.Main} element={<Main />} />
+      <Route path={AppRoute.Login} element={<Login />} />
+      <Route path={AppRoute.Favorites} element={
+        <PrivateRoute>
+          <Favorites offers={props.offers} />
+        </PrivateRoute>
+      }
+      />
+      <Route path={AppRoute.Offer} element={<Offer />} />
+      <Route
+        path="*"
+        element={<Error />}
+      />
+    </Routes>
+  </BrowserRouter>
+);
