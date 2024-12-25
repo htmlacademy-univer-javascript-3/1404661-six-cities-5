@@ -17,11 +17,11 @@ export const CityList = (): JSX.Element => {
       {
         Object.entries(CITIES).map(([key, item]) => (
           <li key={key} className="locations__item">
-            <a className={`locations__item-link tabs__item ${(item.title === currentCity.title) ? 'tabs__item--active' : null}`}
+            <a className={`locations__item-link tabs__item ${(item.name === currentCity.name) ? 'tabs__item--active' : null}`}
               href="#"
               onClick={() => dispatch(changeCity(item))}
             >
-              <span>{item.title}</span>
+              <span>{item.name}</span>
             </a>
           </li>
         ))

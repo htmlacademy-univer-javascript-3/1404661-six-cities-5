@@ -5,10 +5,13 @@ import { Provider } from 'react-redux';
 import { App } from './App';
 
 import { FAVORITIES_OFFERS } from './mocks/favorities-offers';
-import { fetchOffers } from './store/api-actions.ts';
+import { fetchOffers, userCheckAuth } from './store/api-actions.ts';
 import { store } from './store';
 
-store.dispatch(fetchOffers());
+(function initApp() {
+  store.dispatch(fetchOffers());
+  store.dispatch(userCheckAuth());
+})();
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
