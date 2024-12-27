@@ -2,7 +2,7 @@ import { FC } from 'react';
 import classNames from 'classnames';
 import { Link } from 'react-router-dom';
 
-import { IOffer } from '../../../interfaces/components/offer.interface';
+import { IOffer } from '../../../interfaces/offer.interface';
 
 /**
  * Интерфейс компонента карточки предложения.

@@ -1,12 +1,13 @@
 import { FC } from 'react';
 
-import { IReviewItem } from '../../../interfaces/components/review-item.interface';
+import { IComment } from '../../../interfaces/comment.interface';
+import { dateToMonthWordYear, dateToYearMonthDay } from '../../../helpers/dates';
 
 /**
  * Компонент списка отзывов.
- * @returns
+ * @returns {React.FC}
  */
-export const ReviewItem: FC<IReviewItem> = ({ user, rating, comment, date }) => {
+export const ReviewItem: FC<IComment> = ({ user, rating, comment, date }) => {
 
   const persentRating = rating * 20;
 
@@ -26,7 +27,7 @@ export const ReviewItem: FC<IReviewItem> = ({ user, rating, comment, date }) => 
           </div>
         </div>
         <p className="reviews__text">{comment}</p>
-        <time className="reviews__time" dateTime="2019-04-24">{date}</time>
+        <time className="reviews__time" dateTime={dateToYearMonthDay(new Date(date))}>{dateToMonthWordYear(new Date(date))}</time>
       </div>
     </li>
   );

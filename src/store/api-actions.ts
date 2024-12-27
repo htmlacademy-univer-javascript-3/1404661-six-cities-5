@@ -1,16 +1,31 @@
 import { AxiosInstance } from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { getOffers, setAuthorizationStatus, setOffersLoadingStatus, setUserData } from './actions.ts';
-import { Actions } from '../emuns/actions.enum.ts';
-import { API_ROUTES } from '../constants/api-routes.ts';
-import { IOffer } from '../interfaces/components/offer.interface.ts';
-import { AppDispatch } from './state.ts';
-import { State } from 'history';
-import { dropToken, saveToken } from '../api/axios-api.ts';
-import { IUserFull } from '../interfaces/user.inretface.ts';
 import { StatusCodes } from 'http-status-codes';
-import { ILogin } from '../interfaces/login.interface.ts';
 
+import { IOffer } from '../interfaces/offer.interface.ts';
+import { IUserFull } from '../interfaces/user.inretface.ts';
+import { ILogin } from '../interfaces/login.interface.ts';
+import { IOfferFull } from '../interfaces/offer-full.interface.ts';
+import { IComment } from '../interfaces/comment.interface.ts';
+import { IForm } from '../interfaces/form.interface.ts';
+import { LoadingStatus } from '../emuns/statuses.enum.ts';
+import { Actions } from '../emuns/actions.enum.ts';
+
+import {
+  clearUserData,
+  getOffers,
+  setAuthorizationStatus,
+  setComments,
+  setCommentsLoadingStatus,
+  setNearbyOffers,
+  setOffer,
+  setOfferLoadingStatus,
+  setOffersLoadingStatus,
+  setUserData
+} from './actions.ts';
+import { API_ROUTES } from '../constants/api-routes.ts';
+import { AppDispatch, State } from './state.ts';
+import { dropToken, saveToken } from '../api/axios-api.ts';
 
 type DispatchStateExtra = {
   dispatch: AppDispatch;
@@ -18,17 +33,13 @@ type DispatchStateExtra = {
   extra: AxiosInstance;
 };
 
-export const fetchOffers = createAsyncThunk<void, undefined, {
-  dispatch: AppDispatch;
-  state: State;
-  extra: AxiosInstance;
-}>(
+export const fetchOffers = createAsyncThunk<void, undefined, DispatchStateExtra>(
   `${Actions.offers}/fetch`,
   async (_arg, { dispatch, extra: api }) => {
-    dispatch(setOffersLoadingStatus(true));
+    dispatch(setOffersLoadingStatus(LoadingStatus.Pending));
     const { data } = await api.get<IOffer[]>(API_ROUTES.OFFERS.ALL);
     dispatch(getOffers(data));
-    dispatch(setOffersLoadingStatus(false));
+    dispatch(setOffersLoadingStatus(LoadingStatus.Success));
   },
 );
 
@@ -55,7 +66,7 @@ export const userLogout = createAsyncThunk<void, undefined, DispatchStateExtra>(
   async (_arg, { dispatch, extra: api }) => {
     await api.delete(API_ROUTES.USER.LOGOUT);
     dispatch(setAuthorizationStatus(false));
-    dispatch(setUserData(null));
+    dispatch(clearUserData());
     dropToken();
   },
 );
@@ -70,7 +81,58 @@ export const userCheckAuth = createAsyncThunk<void, undefined, DispatchStateExtr
       saveToken(data.token);
     } catch {
       dispatch(setAuthorizationStatus(false));
-      dispatch(setUserData(null));
+      dispatch(clearUserData());
+    }
+  },
+);
+
+export const fetchOffer = createAsyncThunk<void, string, DispatchStateExtra>(
+  `${Actions.offer}/fetch`,
+  async (id, { dispatch, extra: api }) => {
+    dispatch(setOfferLoadingStatus(LoadingStatus.Pending));
+
+    const { status, data } = await api.get<IOfferFull>(API_ROUTES.OFFERS.EXACT(id));
+
+    if (status === Number(StatusCodes.NOT_FOUND)) {
+      dispatch(setOfferLoadingStatus(LoadingStatus.Failure));
+      return;
+    }
+
+    dispatch(setOffer(data));
+    dispatch(setOfferLoadingStatus(LoadingStatus.Success));
+  },
+);
+
+export const fetchOffersNearby = createAsyncThunk<void, string, DispatchStateExtra>(
+  `${Actions.offers}/nearby`,
+  async (id, { dispatch, extra: api }) => {
+    dispatch(setOffersLoadingStatus(LoadingStatus.Pending));
+    const { data: nearbyOffers } = await api.get<IOffer[]>(API_ROUTES.OFFERS.NEARBY(id));
+    dispatch(setNearbyOffers(nearbyOffers));
+    dispatch(setOffersLoadingStatus(LoadingStatus.Success));
+  },
+);
+
+export const fetchComments = createAsyncThunk<void, string, DispatchStateExtra>(
+  `${Actions.comment}/fetch`,
+  async (id, { dispatch, extra: api }) => {
+    dispatch(setOffersLoadingStatus(LoadingStatus.Pending));
+    const { data: comments } = await api.get<IComment[]>(API_ROUTES.COMMENTS.GET(id));
+    dispatch(setComments(comments));
+    dispatch(setCommentsLoadingStatus(LoadingStatus.Success));
+  },
+);
+
+
+export const createComment = createAsyncThunk<void, { form: IForm } & { offerId: string }, DispatchStateExtra>(
+  `${Actions.comment}/create`,
+  async ({ offerId, form }, { dispatch, getState, extra: api }) => {
+    const { status } = await api.post<IForm>(API_ROUTES.COMMENTS.POST(offerId), form);
+
+    const state = getState();
+
+    if (status === Number(StatusCodes.CREATED) && state.offer?.id === Number(offerId)) {
+      dispatch(fetchComments(offerId));
     }
   },
 );

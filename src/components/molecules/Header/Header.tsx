@@ -5,13 +5,20 @@ import { AppRoute } from '../../../emuns/app-route.emun';
 import { useAppDispatch, useAppSelector } from '../../../store/hooks';
 import { userLogout } from '../../../store/api-actions';
 
-export const Header = () => {
+/**
+ * Компонент шапки страницы.
+ * @returns {JSX.Element}
+ */
+export const Header = (): JSX.Element => {
 
   const location = useLocation();
+
   const isLoginPage = location.pathname === AppRoute.Login.toString();
 
   const dispatch = useAppDispatch();
+
   const isAuthorized = useAppSelector((state) => state.authorizationStatus);
+
   const userData = useAppSelector((state) => state.userData);
 
   const handleLogout = () => {
@@ -43,7 +50,7 @@ export const Header = () => {
                         <span className="header__user-name user__name">
                           {userData?.name}
                         </span>
-                        <span className="header__favorite-count">fav_count</span>
+                        <span className="header__favorite-count">fav</span>
                       </Link>
                     </li>
                     <li className="header__nav-item">

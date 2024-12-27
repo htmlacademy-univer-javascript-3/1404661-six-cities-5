@@ -1,14 +1,23 @@
-import React, { ChangeEvent, FormEvent } from 'react';
+import React, { FormEvent } from 'react';
 import { FC, useState } from 'react';
 
 import { IForm } from '../../../interfaces/form.interface';
 
 /**
+ * Интерфейс компонента формы создания комментария.
+ * @prop {(form: IForm) => void} onSubmit - Функция отправки данных.
+ */
+interface ICreateCommentForm {
+  onSubmit: (form: IForm) => void;
+}
+
+/**
  * Компонент формы создания комментария.
+ * @param {ICreateCommentForm} params - Входные парамтеры компонента.
  * @returns {JSX.Element}
  */
-export const CreateCommentForm: FC = (): JSX.Element => {
-  const [form, setForm] = useState<IForm>({ review: '', rating: 0 });
+export const CreateCommentForm: FC<ICreateCommentForm> = ({ onSubmit: submit }): JSX.Element => {
+  const [form, setForm] = useState<IForm>({ comment: '', rating: 0 });
 
   /** Звездочки. */
   const RATING = [0, 1, 2, 3, 4];
@@ -18,22 +27,22 @@ export const CreateCommentForm: FC = (): JSX.Element => {
    * @param {ChangeEvent<HTMLInputElement | HTMLTextAreaElement>} event - Событие изменения поля формы.
    * @return void.
    */
-  const handleInputChange = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = event.target;
+  const handleInputChange = (field: string, value: string | number) => {
 
-    if (name === 'review') {
+    if (field === 'comment') {
       setForm((prev) => ({
         ...prev,
-        review: value,
+        [field]: String(value),
       }));
     }
 
-    if (name === 'rating') {
+    if (field === 'rating') {
       setForm((prev) => ({
         ...prev,
-        rating: Number(value),
+        [field]: Number(value),
       }));
     }
+
   };
 
   /**
@@ -44,7 +53,9 @@ export const CreateCommentForm: FC = (): JSX.Element => {
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    setForm({ review: form.review, rating: form.rating });
+    submit(form);
+
+    setForm({ comment: '', rating: 0 });
   };
 
   /**
@@ -71,7 +82,7 @@ export const CreateCommentForm: FC = (): JSX.Element => {
   };
 
   return (
-    <form className="reviews__form form" onSubmit={handleSubmit} action="#" method="post">
+    <form className="reviews__form form" onSubmit={handleSubmit} method="post">
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">
         {RATING.map((item) => {
@@ -84,7 +95,7 @@ export const CreateCommentForm: FC = (): JSX.Element => {
                 value={rating}
                 id={`${rating}-stars`}
                 type="radio"
-                onChange={handleInputChange}
+                onChange={(e) => handleInputChange('rating', e.target.value)}
                 checked={form.rating === rating}
               />
               <label
@@ -100,12 +111,14 @@ export const CreateCommentForm: FC = (): JSX.Element => {
           );
         })}
       </div>
-      <textarea className="reviews__textarea form__textarea" id="review" name="review" placeholder="Tell how was your stay, what you like and what can be improved" onChange={handleInputChange}></textarea>
+      <textarea className="reviews__textarea form__textarea" id="review" name="comment" placeholder="Tell how was your stay, what you like and what can be improved" onChange={(e) => handleInputChange('comment', e.target.value)}></textarea>
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
           To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">50 characters</b>.
         </p>
-        <button className="reviews__submit form__submit button" type="submit" disabled={form.review.length < 50 || form.rating === 0} > Submit</button>
+        <button className="reviews__submit form__submit button" type="submit" disabled={form.comment.length < 50 || form.rating === 0}>
+          Submit
+        </button>
       </div>
     </form >
   );

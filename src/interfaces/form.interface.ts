@@ -4,6 +4,6 @@
  * @prop {number} rating - Рейтинг.
  */
 export interface IForm {
-  review: string;
+  comment: string;
   rating: number;
 }

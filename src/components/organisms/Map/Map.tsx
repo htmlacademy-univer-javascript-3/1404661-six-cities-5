@@ -2,7 +2,7 @@ import { FC, useEffect, useRef } from 'react';
 import { layerGroup, Marker } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
-import { IOffer } from '../../../interfaces/components/offer.interface';
+import { IOffer } from '../../../interfaces/offer.interface';
 import { ICity } from '../../../interfaces/city.interface';
 
 import useMap from '../../../hooks/useMap';
@@ -10,8 +10,8 @@ import { currentCustomIcon, defaultCustomIcon } from '../../../constants/MapsPoi
 
 /**
  * Интерфейс компонента карты.
- * @prop {IMapPoint} currentCity - Текущий город.
- * @prop { IOffer[]} offers - Пердложения.
+ * @prop {ICity} currentCity - Текущий город.
+ * @prop {IOffer[]} offers - Пердложения.
  * @prop {IOffer | null | undefined} selectedOffer - Выбранное предложение.
  */
 interface IMapProps {
@@ -47,7 +47,7 @@ export const Map: FC<IMapProps> = ({
 
         marker
           .setIcon(
-            selectedOffer && selectedOffer.title === offer.title
+            selectedOffer && selectedOffer.id === offer.id
               ? currentCustomIcon
               : defaultCustomIcon
           )

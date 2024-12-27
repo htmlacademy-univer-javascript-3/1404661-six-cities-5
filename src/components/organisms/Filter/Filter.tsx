@@ -1,4 +1,5 @@
 import { FC, useState } from 'react';
+
 import { FilterTypes } from '../../../constants/filters';
 
 /**
@@ -16,7 +17,7 @@ interface IFilterProps {
  * @param {IFilterProps} params - Входные параметры компонента.
  * @returns {JSX.Element}
  */
-export const Filter: FC<IFilterProps> = ({ currentFilter, onChange }) => {
+export const Filter: FC<IFilterProps> = ({ currentFilter, onChange }): JSX.Element => {
 
   const [isActive, setActive] = useState(false);
 

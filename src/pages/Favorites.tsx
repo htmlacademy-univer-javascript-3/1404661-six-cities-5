@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import OffersList from '../components/molecules/OffersList/OffersList';
 import { Header } from '../components/molecules/Header/Header';
 
-import { IOffer } from '../interfaces/components/offer.interface';
+import { IOffer } from '../interfaces/offer.interface';
 import { AppRoute } from '../emuns/app-route.emun';
 
 /**
