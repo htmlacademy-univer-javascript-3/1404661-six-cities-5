@@ -3,7 +3,7 @@ import classNames from 'classnames';
 
 import Card from '../OfferCard/OfferCard';
 
-import { IOffer } from '../../../interfaces/components/offer.interface';
+import { IOffer } from '../../../interfaces/offer.interface';
 
 /**
  * Интерфейс компонента списка карточек преложений.

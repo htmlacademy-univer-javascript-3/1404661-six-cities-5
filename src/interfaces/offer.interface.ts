@@ -1,6 +1,6 @@
-import { PlacementTypes } from '../../emuns/plecement-types.enum';
-import { ICity } from '../city.interface';
-import { IMapPoint } from '../points.interface';
+import { PlacementTypes } from '../emuns/plecement-types.enum';
+import { ICity } from './city.interface';
+import { IMapPoint } from './points.interface';
 
 /**
  * Интерфейс предложения.

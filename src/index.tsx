@@ -4,13 +4,12 @@ import { Provider } from 'react-redux';
 
 import { App } from './App';
 
-import { FAVORITIES_OFFERS } from './mocks/favorities-offers';
 import { fetchOffers, userCheckAuth } from './store/api-actions.ts';
 import { store } from './store';
 
 (function initApp() {
-  store.dispatch(fetchOffers());
   store.dispatch(userCheckAuth());
+  store.dispatch(fetchOffers());
 })();
 
 const root = ReactDOM.createRoot(
@@ -20,7 +19,7 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App offers={FAVORITIES_OFFERS} />
+      <App />
     </Provider>
   </React.StrictMode>
 );

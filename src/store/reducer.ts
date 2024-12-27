@@ -1,17 +1,20 @@
 import { createReducer } from '@reduxjs/toolkit';
 
 import { CITIES } from '../constants/cities';
-import { changeCity, getOffers, setAuthorizationStatus, setOffersLoadingStatus, setUserData } from './actions';
+import { changeCity, clearComments, clearNearbyOffers, clearOffer, clearUserData, getOffers, setAuthorizationStatus, setComments, setCommentsLoadingStatus, setNearbyOffers, setOffer, setOfferLoadingStatus, setOffersLoadingStatus, setUserData } from './actions';
 import { State } from './types';
-import { NEAR_BY_OFFERS } from '../mocks/nearby-offers';
+import { LoadingStatus } from '../emuns/statuses.enum';
 
 const initialState: State = {
   city: CITIES.Paris,
   offers: [],
-  isOffersDataLoading: false,
-  nearOffers: NEAR_BY_OFFERS,
+  isOffersDataLoading: LoadingStatus.Init,
+  nearOffers: [],
   authorizationStatus: false,
   userData: null,
+  comments: [],
+  isOfferDataLoading: LoadingStatus.Init,
+  isCommentsDataLoading: LoadingStatus.Init
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -30,7 +33,38 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(setUserData, (state, action) => {
       state.userData = action.payload;
+    })
+    .addCase(clearNearbyOffers, (state) => {
+      state.nearOffers = [];
+      state.isOffersDataLoading = LoadingStatus.Init;
+    })
+    .addCase(setNearbyOffers, (state, action) => {
+      state.nearOffers = action.payload;
+    })
+    .addCase(setOffer, (state, action) => {
+      state.offer = action.payload;
+    })
+    .addCase(clearOffer, (state) => {
+      state.offer = undefined;
+      state.isOfferDataLoading = LoadingStatus.Init;
+    })
+    .addCase(setOfferLoadingStatus, (state, action) => {
+      state.isOfferDataLoading = action.payload;
+    })
+    .addCase(clearUserData, (state) => {
+      state.userData = null;
+    })
+    .addCase(setComments, (state, action) => {
+      state.comments = action.payload;
+    })
+    .addCase(clearComments, (state) => {
+      state.comments = [];
+      state.isOffersDataLoading = LoadingStatus.Init;
+    })
+    .addCase(setCommentsLoadingStatus, (state, action) => {
+      state.isCommentsDataLoading = action.payload;
     });
+
 });
 
 export default reducer;

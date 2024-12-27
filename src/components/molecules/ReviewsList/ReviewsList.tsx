@@ -1,13 +1,15 @@
 import { FC } from 'react';
-import { IReviewItem } from '../../../interfaces/components/review-item.interface';
-import ReviewItem from '../ReviewItem/ReviewItem';
+
+import ReviewItem from '../../atoms/ReviewItem/ReviewItem';
+
+import { IComment } from '../../../interfaces/comment.interface';
 
 /**
  * Интерфейс компонента списка отзывов.
  * @prop {IReviewItem[]} reviews - Отзывы.
  */
 interface IReviewsList {
-  reviews: IReviewItem[];
+  reviews: IComment[];
 }
 
 /**

@@ -1,14 +1,14 @@
-import { IUser } from '../user.inretface';
+import { IUser } from './user.inretface';
 
 /**
- * Интерфейс списка отзывов.
+ * Интерфейс отзывова.
  * @prop {number} id- Изображение
  * @prop {IUser} user - Пользователь.
  * @prop {number} rating - Рейтинг.
  * @prop {string} comment - Комментарий.
  * @prop {string} date - Дата.
  */
-export interface IReviewItem {
+export interface IComment {
   id: number;
   user: IUser;
   rating: number;

@@ -7,7 +7,8 @@ import { CityList } from '../../components/molecules/CityList/CityList';
 import { Header } from '../../components/molecules/Header/Header';
 import { Spinner } from '../../components/atoms/Spinner/Spinner';
 
-import { IOffer } from '../../interfaces/components/offer.interface';
+import { IOffer } from '../../interfaces/offer.interface';
+import { LoadingStatus } from '../../emuns/statuses.enum';
 
 import { useAppSelector } from '../../store/hooks';
 import { FilterTypes } from '../../constants/filters';
@@ -79,7 +80,7 @@ export const Main: FC = (): JSX.Element => {
               <h2 className="visually-hidden">Places</h2>
               <b className="places__found">{currentOffers.filter((item) => item.city.name === currentCity.name)?.length} places to stay in {currentCity?.name}</b>
               <Filter currentFilter={currentFilter} onChange={onFilterChange} />
-              {isLoading ? <Spinner /> : <OffersList offers={sortedOffers.filter((item) => item.city.name === currentCity.name)} selectOffer={onClickOffer} />}
+              {isLoading !== LoadingStatus.Success ? <Spinner /> : <OffersList offers={sortedOffers.filter((item) => item.city.name === currentCity.name)} selectOffer={onClickOffer} />}
             </section>
             <div className="cities__right-section">
               <section className="cities__map map">

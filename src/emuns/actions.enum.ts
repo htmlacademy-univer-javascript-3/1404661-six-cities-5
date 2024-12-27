@@ -2,10 +2,10 @@
  * Действия.
  */
 export enum Actions {
-  city = 'city',
-  offers = 'offers',
-  offer = 'offer',
-  favorites = 'favorites',
-  comments = 'comments',
+  city = 'City',
+  offers = 'Offers',
+  offer = 'Offer',
+  favorites = 'Favorites',
+  comment = 'Comment',
   user = 'User'
 }
