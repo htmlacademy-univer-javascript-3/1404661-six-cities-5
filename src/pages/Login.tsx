@@ -32,14 +32,16 @@ export const Login: FC = (): JSX.Element => {
 
     const password = formData.get('password');
 
-    if (email && password) {
-      const user = {
-        email: email,
-        password: password
-      };
-
-      dispatch(userLogin(user as ILogin));
+    if (!email || !password) {
+      return;
     }
+
+    const user = {
+      email: email,
+      password: password
+    };
+
+    dispatch(userLogin(user as ILogin));
   };
 
   if (isAuthorized) {

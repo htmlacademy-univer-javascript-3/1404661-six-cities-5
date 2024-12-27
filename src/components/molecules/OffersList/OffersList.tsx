@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import classNames from 'classnames';
 
-import Card from '../OfferCard/OfferCard';
+import { OfferCard } from '../OfferCard/OfferCard';
 
 import { IOffer } from '../../../interfaces/offer.interface';
 
@@ -18,34 +18,39 @@ export interface IOffersList {
 }
 
 /**
- * Компонент списка карточек преложений.
+ * Компонент списка карточек предложений.
  * @param {IOffersList} params  - Входные парамтеры компонента.
  * @returns {JSX.Element}
  */
-export const OffersList: FC<IOffersList> = ({ selectOffer, offers, isNearPlaces = false }): JSX.Element => (
-  <div className={classNames(isNearPlaces ? 'near-places__list' : 'cities__places-list', 'places__list', !isNearPlaces && 'tabs__content')}>
-    {
-      offers ? offers.map((item) => (
-        <div
-          onMouseEnter={() => selectOffer?.(item)}
-          onMouseLeave={() => selectOffer?.(null)}
-          key={item.id}
-        >
-          <Card
-            id={item.id}
-            title={item.title}
-            type={item.type}
-            previewImage={item.previewImage}
-            price={item.price}
-            rating={item.rating}
-            inBookmarks={item.inBookmarks}
-            isPremium={item.isPremium}
-            isNearPlaces={isNearPlaces}
-            city={item.city}
-          />
-        </div>)
-      ) : null
-    }
-  </div>);
+export const OffersList: FC<IOffersList> = ({ selectOffer, offers, isNearPlaces = false }) => {
+  if (!offers) {
+    return null;
+  }
 
-export default OffersList;
+  return (
+    <div className={classNames(isNearPlaces ? 'near-places__list' : 'cities__places-list', 'places__list', !isNearPlaces && 'tabs__content')}>
+      {
+        offers.map((item) => (
+          <div
+            onMouseEnter={() => selectOffer?.(item)}
+            onMouseLeave={() => selectOffer?.(null)}
+            key={item.id}
+          >
+            <OfferCard
+              id={item.id}
+              title={item.title}
+              type={item.type}
+              previewImage={item.previewImage}
+              price={item.price}
+              rating={item.rating}
+              inBookmarks={item.inBookmarks}
+              isPremium={item.isPremium}
+              isNearPlaces={isNearPlaces}
+              city={item.city}
+            />
+          </div>
+        ))
+      }
+    </div>
+  );
+};

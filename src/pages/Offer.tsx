@@ -2,9 +2,9 @@ import { FC, useCallback, useEffect, useState } from 'react';
 import { Navigate, useParams } from 'react-router-dom';
 
 import { CreateCommentForm } from '../components/organisms/CreateCommentForm/CreateCommentForm';
-import Map from '../components/organisms/Map/Map';
-import ReviewsList from '../components/molecules/ReviewsList/ReviewsList';
-import OffersList from '../components/molecules/OffersList/OffersList';
+import { Map } from '../components/organisms/Map/Map';
+import { ReviewsList } from '../components/molecules/ReviewsList/ReviewsList';
+import { OffersList } from '../components/molecules/OffersList/OffersList';
 import { Header } from '../components/molecules/Header/Header';
 import { Spinner } from '../components/atoms/Spinner/Spinner';
 
@@ -89,7 +89,7 @@ export const Offer: FC = (): JSX.Element => {
 
     dispatch(createComment({ offerId: String(offer.id), form }));
 
-    if (!id || !offer) {
+    if (!id) {
       return;
     }
 
@@ -143,13 +143,15 @@ export const Offer: FC = (): JSX.Element => {
                   </button>
                 )}
               </div>
-              <div className="offer__rating rating">
-                <div className="offer__stars rating__stars">
-                  <span style={{ 'width': `${offer?.rating}%` }}></span>
-                  <span className="visually-hidden">Rating</span>
+              {offer?.rating && (
+                <div className="offer__rating rating">
+                  <div className="offer__stars rating__stars">
+                    <span style={{ 'width': `${Math.floor(offer?.rating + 0.5) * 20}%` }}></span>
+                    <span className="visually-hidden">Rating</span>
+                  </div>
+                  <span className="offer__rating-value rating__value">{offer?.rating}</span>
                 </div>
-                <span className="offer__rating-value rating__value">{offer?.rating}</span>
-              </div>
+              )}
               <ul className="offer__features">
                 <li className="offer__feature offer__feature--entire">
                   {offer?.type}
