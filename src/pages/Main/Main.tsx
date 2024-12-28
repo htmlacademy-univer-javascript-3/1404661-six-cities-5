@@ -9,6 +9,7 @@ import { Spinner } from '../../components/atoms/Spinner/Spinner';
 
 import { IOffer } from '../../interfaces/offer.interface';
 import { LoadingStatus } from '../../emuns/statuses.enum';
+import { Actions } from '../../emuns/actions.enum';
 
 import { useAppSelector } from '../../store/hooks';
 import { FilterTypes } from '../../constants/filters';
@@ -25,11 +26,11 @@ export const Main: FC = (): JSX.Element => {
 
   const [currentFilter, setCurrentFilter] = useState<FilterTypes>(FilterTypes.popular);
 
-  const currentCity = useAppSelector((state) => state.city);
+  const currentCity = useAppSelector((state) => state[Actions.city].city);
 
-  const currentOffers = useAppSelector((state) => state.offers);
+  const currentOffers = useAppSelector((state) => state[Actions.offers].offers);
 
-  const isLoading = useAppSelector((state) => state.isOffersDataLoading);
+  const isLoading = useAppSelector((state) => state[Actions.offers].isOffersDataLoading);
 
   /**
    * Изменение фильра.

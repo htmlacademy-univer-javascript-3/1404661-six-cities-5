@@ -1,6 +1,7 @@
 import { Link, useLocation } from 'react-router-dom';
 
 import { AppRoute } from '../../../emuns/app-route.emun';
+import { Actions } from '../../../emuns/actions.enum';
 
 import { useAppDispatch, useAppSelector } from '../../../store/hooks';
 import { userLogout } from '../../../store/api-actions';
@@ -17,10 +18,13 @@ export const Header = (): JSX.Element => {
 
   const dispatch = useAppDispatch();
 
-  const isAuthorized = useAppSelector((state) => state.authorizationStatus);
+  const isAuthorized = useAppSelector((state) => state[Actions.user].authorizationStatus);
 
-  const userData = useAppSelector((state) => state.userData);
+  const userData = useAppSelector((state) => state[Actions.user].userData);
 
+  /**
+   * Выход из приложения.
+   */
   const handleLogout = () => {
     dispatch(userLogout());
   };

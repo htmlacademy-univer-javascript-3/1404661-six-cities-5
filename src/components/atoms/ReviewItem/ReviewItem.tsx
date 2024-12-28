@@ -1,5 +1,7 @@
 import { FC } from 'react';
 
+import { Rating } from '../Rating/Rating';
+
 import { IComment } from '../../../interfaces/comment.interface';
 
 import { dateToMonthWordYear, dateToYearMonthDay } from '../../../helpers/dates';
@@ -17,12 +19,7 @@ export const ReviewItem: FC<IComment> = ({ user, rating, comment, date }) => (
       <span className="reviews__user-name">{user.name}</span>
     </div>
     <div className="reviews__info">
-      <div className="reviews__rating rating">
-        <div className="reviews__stars rating__stars">
-          <span style={{ 'width': `${Math.floor(rating + 0.5) * 20}%` }}></span>
-          <span className="visually-hidden">Rating</span>
-        </div>
-      </div>
+      <Rating score={rating} hasText={false} />
       <p className="reviews__text">{comment}</p>
       <time className="reviews__time" dateTime={dateToYearMonthDay(new Date(date))}>{dateToMonthWordYear(new Date(date))}</time>
     </div>

@@ -5,6 +5,7 @@ import { Header } from '../components/molecules/Header/Header';
 
 import { ILogin } from '../interfaces/login.interface';
 import { AppRoute } from '../emuns/app-route.emun';
+import { Actions } from '../emuns/actions.enum';
 
 import { userLogin } from '../store/api-actions';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
@@ -16,7 +17,7 @@ import { useAppDispatch, useAppSelector } from '../store/hooks';
 export const Login: FC = (): JSX.Element => {
   const dispatch = useAppDispatch();
 
-  const isAuthorized = useAppSelector((state) => state.authorizationStatus);
+  const isAuthorized = useAppSelector((state) => state[Actions.user].authorizationStatus);
 
   /**
    * Отправка данных формы авторизации.
