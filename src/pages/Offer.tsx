@@ -107,18 +107,16 @@ export const Offer: FC = (): JSX.Element => {
   /**
    * Ближайшие предложения.
    */
-  const nearOffersData = useMemo(() => {
-    return isOffersDataLoading !== LoadingStatus.Success || !nearOffers ? (
-      <Spinner />
-    ) : (
-      <section className="near-places places">
-        <h2 className="near-places__title">Other places in the neighbourhood</h2>
-        <div className="near-places__list places__list">
-          <OffersList offers={nearOffers} selectOffer={onClickOffer} isNearPlaces />
-        </div>
-      </section>
-    )
-  }, [isOffersDataLoading, nearOffers])
+  const nearOffersData = useMemo(() => isOffersDataLoading !== LoadingStatus.Success || !nearOffers ? (
+    <Spinner />
+  ) : (
+    <section className="near-places places">
+      <h2 className="near-places__title">Other places in the neighbourhood</h2>
+      <div className="near-places__list places__list">
+        <OffersList offers={nearOffers} selectOffer={onClickOffer} isNearPlaces />
+      </div>
+    </section>
+  ), [isOffersDataLoading, nearOffers]);
 
   if (!id || (isOfferDataLoading === LoadingStatus.Failure && !offer)) {
     return <Navigate to={'/404'} />;

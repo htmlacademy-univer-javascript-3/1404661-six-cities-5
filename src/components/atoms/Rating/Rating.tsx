@@ -1,4 +1,4 @@
-import { FC } from "react"
+import { FC } from 'react';
 
 /**
  * Интерфейс компонента рейтинга.
@@ -12,12 +12,14 @@ interface IRatingProps {
 
 /**
  * Компонент рейтинга.
- * @param {IRatingProps} param - Входные параметры компонента. 
+ * @param {IRatingProps} param - Входные параметры компонента.
  * @returns {React.FC}
  */
 export const Rating: FC<IRatingProps> = ({ score, hasText = true }) => {
 
-  if (!score) return;
+  if (!score) {
+    return;
+  }
 
   return (
     <div className="offer__rating rating">
@@ -29,5 +31,5 @@ export const Rating: FC<IRatingProps> = ({ score, hasText = true }) => {
         <span className="offer__rating-value rating__value">{score}</span>
       )}
     </div>
-  )
-}
+  );
+};

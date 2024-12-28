@@ -8,7 +8,7 @@ import { clearComments, setComments, setCommentsLoadingStatus } from '../actions
 interface CommentsState {
   comments: IComment[];
   isCommentsDataLoading: LoadingStatus;
-};
+}
 
 const initialState: CommentsState = {
   comments: [],

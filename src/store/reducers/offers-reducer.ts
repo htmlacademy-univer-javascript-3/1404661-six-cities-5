@@ -10,7 +10,7 @@ interface OffersState {
   offers: IOffer[];
   nearOffers: IOffer[];
   isOffersDataLoading: LoadingStatus;
-};
+}
 
 const initialState: OffersState = {
   offers: [],

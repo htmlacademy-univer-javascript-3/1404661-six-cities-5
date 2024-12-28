@@ -9,7 +9,7 @@ interface OfferState {
   offer?: IOfferFull;
   isOfferDataLoading: LoadingStatus;
   activeOffer?: string;
-};
+}
 
 const initialState: OfferState = {
   offer: undefined,
@@ -27,7 +27,7 @@ const offerReducer = createReducer(initialState, (builder) => {
     })
     .addCase(setOfferLoadingStatus, (state, action) => {
       state.isOfferDataLoading = action.payload;
-    })
+    });
 });
 
 export { offerReducer };

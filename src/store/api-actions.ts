@@ -131,7 +131,7 @@ export const createComment = createAsyncThunk<void, { form: IForm } & { offerId:
 
     const state = getState();
 
-    if (status === Number(StatusCodes.CREATED) && state.offer?.id === Number(offerId)) {
+    if (status === Number(StatusCodes.CREATED) && state[Actions.offer].offer && state[Actions.offer].offer?.id === Number(offerId)) {
       dispatch(fetchComments(offerId));
     }
   },

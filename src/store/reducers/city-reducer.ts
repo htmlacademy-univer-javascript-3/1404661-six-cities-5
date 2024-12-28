@@ -7,7 +7,7 @@ import { changeCity } from '../actions';
 
 interface CityState {
   city: ICity;
-};
+}
 
 const initialState: CityState = {
   city: CITIES.Paris,

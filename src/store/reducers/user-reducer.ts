@@ -7,7 +7,7 @@ import { clearUserData, setAuthorizationStatus, setUserData } from '../actions';
 interface UserState {
   authorizationStatus: boolean;
   userData: IUserFull | null;
-};
+}
 
 const initialState: UserState = {
   authorizationStatus: false,
