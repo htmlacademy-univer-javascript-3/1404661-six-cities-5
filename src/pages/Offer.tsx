@@ -1,16 +1,18 @@
-import { FC, useCallback, useEffect, useState } from 'react';
+import { FC, useCallback, useEffect, useMemo, useState } from 'react';
 import { Navigate, useParams } from 'react-router-dom';
 
 import { CreateCommentForm } from '../components/organisms/CreateCommentForm/CreateCommentForm';
-import Map from '../components/organisms/Map/Map';
-import ReviewsList from '../components/molecules/ReviewsList/ReviewsList';
-import OffersList from '../components/molecules/OffersList/OffersList';
+import { Map } from '../components/organisms/Map/Map';
+import { ReviewsList } from '../components/molecules/ReviewsList/ReviewsList';
+import { OffersList } from '../components/molecules/OffersList/OffersList';
 import { Header } from '../components/molecules/Header/Header';
 import { Spinner } from '../components/atoms/Spinner/Spinner';
+import { Rating } from '../components/atoms/Rating/Rating';
 
 import { IOffer } from '../interfaces/offer.interface';
 import { IForm } from '../interfaces/form.interface';
 import { LoadingStatus } from '../emuns/statuses.enum';
+import { Actions } from '../emuns/actions.enum';
 
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { createComment, fetchComments, fetchOffer, fetchOffersNearby } from '../store/api-actions';
@@ -29,24 +31,21 @@ export const Offer: FC = (): JSX.Element => {
 
   const dispatch = useAppDispatch();
 
-  const nearByOffers = useAppSelector((state) => state.nearOffers);
+  const isAuthorized = useAppSelector((state) => state[Actions.user].authorizationStatus);
 
-  const isAuthorized = useAppSelector((state) => state.authorizationStatus);
+  const city = useAppSelector((state) => state[Actions.city].city);
 
-  const city = useAppSelector((state) => state.city);
+  const offer = useAppSelector((state) => state[Actions.offer].offer);
 
-  const offer = useAppSelector((state) => state.offer);
+  const isOfferDataLoading = useAppSelector((state) => state[Actions.offer].isOfferDataLoading);
 
-  const isOfferDataLoading = useAppSelector((state) => state.isOfferDataLoading);
+  const nearOffers = useAppSelector((state) => state[Actions.offers].nearOffers);
 
-  const nearbyOffers = useAppSelector((state) => state.nearOffers);
+  const isOffersDataLoading = useAppSelector((state) => state[Actions.offers].isOffersDataLoading);
 
-  const isOffersDataLoading = useAppSelector((state) => state.isOffersDataLoading);
+  const reviews = useAppSelector((state) => state[Actions.comment].comments);
 
-  const reviews = useAppSelector((state) => state.comments);
-
-  const isCommentsDataLoading = useAppSelector((state) => state.isCommentsDataLoading);
-
+  const isCommentsDataLoading = useAppSelector((state) => state[Actions.comment].isCommentsDataLoading);
 
   /**
    * Эффектит загрузку данных предложения.
@@ -89,7 +88,7 @@ export const Offer: FC = (): JSX.Element => {
 
     dispatch(createComment({ offerId: String(offer.id), form }));
 
-    if (!id || !offer) {
+    if (!id) {
       return;
     }
 
@@ -104,6 +103,20 @@ export const Offer: FC = (): JSX.Element => {
   const onClickOffer = (selectItem: IOffer | null) => {
     setSelectedPoint(selectItem);
   };
+
+  /**
+   * Ближайшие предложения.
+   */
+  const nearOffersData = useMemo(() => isOffersDataLoading !== LoadingStatus.Success || !nearOffers ? (
+    <Spinner />
+  ) : (
+    <section className="near-places places">
+      <h2 className="near-places__title">Other places in the neighbourhood</h2>
+      <div className="near-places__list places__list">
+        <OffersList offers={nearOffers} selectOffer={onClickOffer} isNearPlaces />
+      </div>
+    </section>
+  ), [isOffersDataLoading, nearOffers]);
 
   if (!id || (isOfferDataLoading === LoadingStatus.Failure && !offer)) {
     return <Navigate to={'/404'} />;
@@ -143,13 +156,7 @@ export const Offer: FC = (): JSX.Element => {
                   </button>
                 )}
               </div>
-              <div className="offer__rating rating">
-                <div className="offer__stars rating__stars">
-                  <span style={{ 'width': `${offer?.rating}%` }}></span>
-                  <span className="visually-hidden">Rating</span>
-                </div>
-                <span className="offer__rating-value rating__value">{offer?.rating}</span>
-              </div>
+              <Rating score={offer?.rating} />
               <ul className="offer__features">
                 <li className="offer__feature offer__feature--entire">
                   {offer?.type}
@@ -204,20 +211,11 @@ export const Offer: FC = (): JSX.Element => {
             </div>
           </div>
           <section className="offer__map map">
-            <Map currentCity={city} offers={nearbyOffers} selectedOffer={selectedOffer} />
+            <Map currentCity={city} offers={nearOffers} selectedOffer={selectedOffer} />
           </section>
         </section>
         <div className="container">
-          {isOffersDataLoading !== LoadingStatus.Success || !nearbyOffers ? (
-            <Spinner />
-          ) : (
-            <section className="near-places places">
-              <h2 className="near-places__title">Other places in the neighbourhood</h2>
-              <div className="near-places__list places__list">
-                <OffersList offers={nearByOffers} selectOffer={onClickOffer} isNearPlaces />
-              </div>
-            </section>
-          )}
+          {nearOffersData}
         </div>
       </main>
     </div>

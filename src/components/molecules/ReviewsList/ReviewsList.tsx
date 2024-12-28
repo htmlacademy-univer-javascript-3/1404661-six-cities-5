@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import ReviewItem from '../../atoms/ReviewItem/ReviewItem';
+import { ReviewItem } from '../../atoms/ReviewItem/ReviewItem';
 
 import { IComment } from '../../../interfaces/comment.interface';
 
@@ -36,5 +36,3 @@ export const ReviewsList: FC<IReviewsList> = ({ reviews }): JSX.Element => (
     </ul>
   </>
 );
-
-export default ReviewsList;

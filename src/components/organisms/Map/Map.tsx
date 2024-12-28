@@ -62,5 +62,3 @@ export const Map: FC<IMapProps> = ({
 
   return <div style={{ height: '500px' }} ref={mapRef}></div>;
 };
-
-export default Map;

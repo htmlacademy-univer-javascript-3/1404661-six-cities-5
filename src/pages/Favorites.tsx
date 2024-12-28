@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { Link } from 'react-router-dom';
 
-import OffersList from '../components/molecules/OffersList/OffersList';
+import { OffersList } from '../components/molecules/OffersList/OffersList';
 import { Header } from '../components/molecules/Header/Header';
 
 import { IOffer } from '../interfaces/offer.interface';
@@ -14,6 +14,7 @@ import { AppRoute } from '../emuns/app-route.emun';
 interface IFavoritesProps {
   offers: IOffer[];
 }
+
 /**
  * Компонент страницы избранного.
  * @param {IFavoritesProps} param - Входные параметры компонента.

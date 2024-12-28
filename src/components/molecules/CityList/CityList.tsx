@@ -1,3 +1,5 @@
+import { Actions } from '../../../emuns/actions.enum';
+
 import { CITIES } from '../../../constants/cities';
 import { changeCity } from '../../../store/actions';
 import { useAppDispatch, useAppSelector } from '../../../store/hooks';
@@ -8,7 +10,7 @@ import { useAppDispatch, useAppSelector } from '../../../store/hooks';
  */
 export const CityList = (): JSX.Element => {
 
-  const currentCity = useAppSelector((state) => state.city);
+  const currentCity = useAppSelector((state) => state[Actions.city].city);
 
   const dispatch = useAppDispatch();
 
