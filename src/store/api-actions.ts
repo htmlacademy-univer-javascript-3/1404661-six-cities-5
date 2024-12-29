@@ -17,6 +17,8 @@ import {
   setAuthorizationStatus,
   setComments,
   setCommentsLoadingStatus,
+  setFavorites,
+  setFavoritesLoadingStatus,
   setNearbyOffers,
   setOffer,
   setOfferLoadingStatus,
@@ -37,7 +39,11 @@ export const fetchOffers = createAsyncThunk<void, undefined, DispatchStateExtra>
   `${Actions.offers}/fetch`,
   async (_arg, { dispatch, extra: api }) => {
     dispatch(setOffersLoadingStatus(LoadingStatus.Pending));
-    const { data } = await api.get<IOffer[]>(API_ROUTES.OFFERS.ALL);
+    const { status, data } = await api.get<IOffer[]>(API_ROUTES.OFFERS.ALL);
+    if (status === Number(StatusCodes.NOT_FOUND)) {
+      dispatch(setOffersLoadingStatus(LoadingStatus.Failure));
+      return;
+    }
     dispatch(getOffers(data));
     dispatch(setOffersLoadingStatus(LoadingStatus.Success));
   },
@@ -133,6 +139,36 @@ export const createComment = createAsyncThunk<void, { form: IForm } & { offerId:
 
     if (status === Number(StatusCodes.CREATED) && state[Actions.offer].offer && state[Actions.offer].offer?.id === Number(offerId)) {
       dispatch(fetchComments(offerId));
+    }
+  },
+);
+
+export const fetchFavorites = createAsyncThunk<void, undefined, DispatchStateExtra>(
+  `${Actions.favorites}/fetch`,
+  async (_arg, { dispatch, extra: api }) => {
+    dispatch(setFavoritesLoadingStatus(LoadingStatus.Pending));
+    const { status, data } = await api.get<IOffer[]>(API_ROUTES.FAVORITE.GET);
+    if (status === Number(StatusCodes.NOT_FOUND)) {
+      dispatch(setFavoritesLoadingStatus(LoadingStatus.Failure));
+      return;
+    }
+
+    dispatch(setFavorites(data));
+    dispatch(setFavoritesLoadingStatus(LoadingStatus.Success));
+  },
+);
+
+export const changeFavorite = createAsyncThunk<void, { offerId: string; favoriteStatus: boolean; offerPageId?: string }, DispatchStateExtra>(
+  `${Actions.favorites}/change`,
+  async ({ offerId, favoriteStatus, offerPageId }, { dispatch, extra: api }) => {
+    const { status } = await api.post<IForm>(API_ROUTES.FAVORITE.SET_STATUS(offerId, favoriteStatus ? 1 : 0));
+
+    if ((status === Number(StatusCodes.CREATED) || status === Number(StatusCodes.OK))) {
+      dispatch(fetchFavorites());
+      dispatch(fetchOffers());
+      if (offerPageId) {
+        dispatch(fetchOffersNearby(offerPageId));
+      }
     }
   },
 );

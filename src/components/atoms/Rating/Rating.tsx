@@ -24,7 +24,7 @@ export const Rating: FC<IRatingProps> = ({ score, hasText = true }) => {
   return (
     <div className="offer__rating rating">
       <div className="offer__stars rating__stars">
-        <span style={{ 'width': `${Math.floor(score + 0.5) * 20}%` }}></span>
+        <span style={{ 'width': `${score * 20}%` }}></span>
         <span className="visually-hidden">Rating</span>
       </div>
       {hasText && (

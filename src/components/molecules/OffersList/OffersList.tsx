@@ -1,9 +1,12 @@
-import { FC } from 'react';
+import { FC, useCallback } from 'react';
 import classNames from 'classnames';
 
 import { OfferCard } from '../OfferCard/OfferCard';
 
 import { IOffer } from '../../../interfaces/offer.interface';
+
+import { useAppDispatch } from '../../../store/hooks';
+import { changeFavorite } from '../../../store/api-actions';
 
 /**
  * Интерфейс компонента списка карточек преложений.
@@ -15,6 +18,7 @@ export interface IOffersList {
   selectOffer?: (selectedOffer: IOffer | null) => void;
   offers?: IOffer[];
   isNearPlaces?: boolean;
+  offerPage?: string;
 }
 
 /**
@@ -22,7 +26,32 @@ export interface IOffersList {
  * @param {IOffersList} params  - Входные парамтеры компонента.
  * @returns {JSX.Element}
  */
-export const OffersList: FC<IOffersList> = ({ selectOffer, offers, isNearPlaces = false }) => {
+export const OffersList: FC<IOffersList> = ({ selectOffer, offers, offerPage, isNearPlaces = false }) => {
+
+  const dispatch = useAppDispatch();
+
+  /**
+   * Дабавление в изабранное.
+   */
+  const onFavoriteClick = useCallback((id: string, isFavorite: boolean) => {
+    if (offerPage) {
+      dispatch(
+        changeFavorite({
+          offerId: String(id),
+          favoriteStatus: !isFavorite,
+          offerPageId: offerPage
+        }),
+      );
+    } else {
+      dispatch(
+        changeFavorite({
+          offerId: String(id),
+          favoriteStatus: !isFavorite,
+        }),
+      );
+    }
+  }, [dispatch, offerPage]);
+
   if (!offers) {
     return null;
   }
@@ -43,10 +72,11 @@ export const OffersList: FC<IOffersList> = ({ selectOffer, offers, isNearPlaces 
               previewImage={item.previewImage}
               price={item.price}
               rating={item.rating}
-              inBookmarks={item.inBookmarks}
+              isFavorite={item.isFavorite}
               isPremium={item.isPremium}
               isNearPlaces={isNearPlaces}
               city={item.city}
+              onClick={onFavoriteClick}
             />
           </div>
         ))

@@ -21,7 +21,7 @@ export const App = (): JSX.Element => (
       <Route path={AppRoute.Login} element={<Login />} />
       <Route path={AppRoute.Favorites} element={
         <PrivateRoute>
-          <Favorites offers={[]} />
+          <Favorites />
         </PrivateRoute>
       }
       />

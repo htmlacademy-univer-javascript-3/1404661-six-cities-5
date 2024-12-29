@@ -9,7 +9,7 @@ export const API_ROUTES = {
   },
   FAVORITE: {
     GET: '/favorite',
-    SET_STATUS: (offerId: string, status: boolean) => `/favorite/${offerId}/${status}`,
+    SET_STATUS: (offerId: string, status: number) => `/favorite/${offerId}/${status}`,
   },
   COMMENTS: {
     GET: (offerId: string) => `/comments/${offerId}`,

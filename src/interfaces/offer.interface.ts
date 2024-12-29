@@ -12,7 +12,7 @@ import { IMapPoint } from './points.interface';
  * @prop {number} rating - Рейтинг.
  * @prop {ICity} city - Город.
  * @prop {IMapPoint | undefined} location - Координаты.
- * @prop {boolean | undefined} inBookmarks - Есть ли в заметках?
+ * @prop {boolean | undefined} isFavorite - Есть ли в заметках?
  * @prop {boolean | undefined} isPremium - Является ли премиумом?
  */
 export interface IOffer {
@@ -24,6 +24,6 @@ export interface IOffer {
   rating: number;
   city: ICity;
   location?: IMapPoint;
-  inBookmarks?: boolean;
+  isFavorite?: boolean;
   isPremium?: boolean;
 }
