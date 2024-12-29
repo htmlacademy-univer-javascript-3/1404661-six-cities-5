@@ -49,3 +49,7 @@ export const clearComments = createAction(`${Actions.comment}/clear`);
 
 /** Установка статуса загрузки комментариев. */
 export const setCommentsLoadingStatus = createAction<LoadingStatus>(`${Actions.comment}/loading`);
+
+export const setFavorites = createAction<IOffer[]>(`${Actions.favorites}/fill`);
+
+export const setFavoritesLoadingStatus = createAction<LoadingStatus>(`${Actions.favorites}/loading`);

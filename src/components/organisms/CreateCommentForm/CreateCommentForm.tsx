@@ -42,7 +42,6 @@ export const CreateCommentForm: FC<ICreateCommentForm> = ({ onSubmit: submit }):
         [field]: Number(value),
       }));
     }
-
   };
 
   /**

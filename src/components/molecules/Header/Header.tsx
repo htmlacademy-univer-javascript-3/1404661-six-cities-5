@@ -1,10 +1,11 @@
 import { Link, useLocation } from 'react-router-dom';
+import { useEffect, useMemo } from 'react';
 
 import { AppRoute } from '../../../emuns/app-route.emun';
 import { Actions } from '../../../emuns/actions.enum';
 
 import { useAppDispatch, useAppSelector } from '../../../store/hooks';
-import { userLogout } from '../../../store/api-actions';
+import { fetchFavorites, userLogout } from '../../../store/api-actions';
 
 /**
  * Компонент шапки страницы.
@@ -22,12 +23,28 @@ export const Header = (): JSX.Element => {
 
   const userData = useAppSelector((state) => state[Actions.user].userData);
 
+  const favorites = useAppSelector((state) => state[Actions.favorites].favorites);
+
+  /**
+   * Загрузка избранных предложений.
+   */
+  useEffect(() => {
+    if (isAuthorized) {
+      dispatch(fetchFavorites());
+    }
+  }, [dispatch, isAuthorized, userData]);
+
   /**
    * Выход из приложения.
    */
   const handleLogout = () => {
     dispatch(userLogout());
   };
+
+  /**
+   * Количество избранных предложений.
+   */
+  const favoritesCount = useMemo(() => <span className="header__favorite-count">{favorites.length}</span>, [favorites]);
 
   return (
     <header className="header">
@@ -54,7 +71,7 @@ export const Header = (): JSX.Element => {
                         <span className="header__user-name user__name">
                           {userData?.name}
                         </span>
-                        <span className="header__favorite-count">fav</span>
+                        {favoritesCount}
                       </Link>
                     </li>
                     <li className="header__nav-item">

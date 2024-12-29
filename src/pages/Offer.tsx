@@ -15,8 +15,9 @@ import { LoadingStatus } from '../emuns/statuses.enum';
 import { Actions } from '../emuns/actions.enum';
 
 import { useAppDispatch, useAppSelector } from '../store/hooks';
-import { createComment, fetchComments, fetchOffer, fetchOffersNearby } from '../store/api-actions';
+import { changeFavorite, createComment, fetchComments, fetchOffer, fetchOffersNearby } from '../store/api-actions';
 import { clearComments, clearNearbyOffers, clearOffer } from '../store/actions';
+import classNames from 'classnames';
 
 /**
  * Компонент страницы предложения.
@@ -24,7 +25,6 @@ import { clearComments, clearNearbyOffers, clearOffer } from '../store/actions';
  * @returns {JSX.Element}
  */
 export const Offer: FC = (): JSX.Element => {
-
   const [selectedOffer, setSelectedPoint] = useState<IOffer | null>(null);
 
   const { id } = useParams();
@@ -46,6 +46,24 @@ export const Offer: FC = (): JSX.Element => {
   const reviews = useAppSelector((state) => state[Actions.comment].comments);
 
   const isCommentsDataLoading = useAppSelector((state) => state[Actions.comment].isCommentsDataLoading);
+
+  /**
+  * Дабавление в изабранное.
+  */
+  const onFavoriteClick = () => {
+    dispatch(
+      changeFavorite({
+        offerId: String(id),
+        favoriteStatus: !offer?.isFavorite,
+      }),
+    ).then(() => {
+      if (!id) {
+        return;
+      }
+
+      dispatch(fetchOffer(id));
+    });
+  };
 
   /**
    * Эффектит загрузку данных предложения.
@@ -110,13 +128,8 @@ export const Offer: FC = (): JSX.Element => {
   const nearOffersData = useMemo(() => isOffersDataLoading !== LoadingStatus.Success || !nearOffers ? (
     <Spinner />
   ) : (
-    <section className="near-places places">
-      <h2 className="near-places__title">Other places in the neighbourhood</h2>
-      <div className="near-places__list places__list">
-        <OffersList offers={nearOffers} selectOffer={onClickOffer} isNearPlaces />
-      </div>
-    </section>
-  ), [isOffersDataLoading, nearOffers]);
+    <OffersList offers={nearOffers} selectOffer={onClickOffer} offerPage={String(offer?.id)} isNearPlaces />
+  ), [isOffersDataLoading, nearOffers, offer]);
 
   if (!id || (isOfferDataLoading === LoadingStatus.Failure && !offer)) {
     return <Navigate to={'/404'} />;
@@ -147,14 +160,13 @@ export const Offer: FC = (): JSX.Element => {
                 <h1 className="offer__name">
                   {offer?.title}
                 </h1>
-                {isAuthorized && (
-                  <button className="offer__bookmark-button button" type="button">
+                {isAuthorized &&
+                  <button className={classNames('offer__bookmark-button', 'button', offer?.isFavorite ? 'offer__bookmark-button--active' : '')} type="button" onClick={onFavoriteClick}>
                     <svg className="offer__bookmark-icon" width="31" height="33">
-                      <use xlinkHref="#icon-bookmark" />
+                      <use xlinkHref="#icon-bookmark"></use>
                     </svg>
                     <span className="visually-hidden">To bookmarks</span>
-                  </button>
-                )}
+                  </button>}
               </div>
               <Rating score={offer?.rating} />
               <ul className="offer__features">
@@ -215,7 +227,12 @@ export const Offer: FC = (): JSX.Element => {
           </section>
         </section>
         <div className="container">
-          {nearOffersData}
+          <section className="near-places places">
+            <h2 className="near-places__title">Other places in the neighbourhood</h2>
+            <div className="near-places__list places__list">
+              {nearOffersData}
+            </div>
+          </section>
         </div>
       </main>
     </div>
