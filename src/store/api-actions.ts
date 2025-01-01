@@ -122,7 +122,7 @@ export const fetchOffersNearby = createAsyncThunk<void, string, DispatchStateExt
 export const fetchComments = createAsyncThunk<void, string, DispatchStateExtra>(
   `${Actions.comment}/fetch`,
   async (id, { dispatch, extra: api }) => {
-    dispatch(setOffersLoadingStatus(LoadingStatus.Pending));
+    dispatch(setCommentsLoadingStatus(LoadingStatus.Pending));
     const { data: comments } = await api.get<IComment[]>(API_ROUTES.COMMENTS.GET(id));
     dispatch(setComments(comments));
     dispatch(setCommentsLoadingStatus(LoadingStatus.Success));

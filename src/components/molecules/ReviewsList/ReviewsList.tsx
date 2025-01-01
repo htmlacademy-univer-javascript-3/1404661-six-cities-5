@@ -25,11 +25,7 @@ export const ReviewsList: FC<IReviewsList> = ({ reviews }): JSX.Element => (
         reviews.map((item) => (
           <ReviewItem
             key={item.id}
-            id={item.id}
-            user={item.user}
-            rating={item.rating}
-            comment={item.comment}
-            date={item.date}
+            comment={item}
           />
         ))
       }

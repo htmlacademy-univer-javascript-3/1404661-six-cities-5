@@ -11,9 +11,9 @@ import { IMapPoint } from './points.interface';
  * @prop {number} price - Цена.
  * @prop {number} rating - Рейтинг.
  * @prop {ICity} city - Город.
- * @prop {IMapPoint | undefined} location - Координаты.
- * @prop {boolean | undefined} isFavorite - Есть ли в заметках?
- * @prop {boolean | undefined} isPremium - Является ли премиумом?
+ * @prop {IMapPoint} location - Координаты.
+ * @prop {boolean} isFavorite - Есть ли в заметках?
+ * @prop {boolean} isPremium - Является ли премиумом?
  */
 export interface IOffer {
   id: number;
@@ -23,7 +23,7 @@ export interface IOffer {
   price: number;
   rating: number;
   city: ICity;
-  location?: IMapPoint;
-  isFavorite?: boolean;
-  isPremium?: boolean;
+  location: IMapPoint;
+  isFavorite: boolean;
+  isPremium: boolean;
 }

@@ -48,27 +48,30 @@ export const Favorites = (): JSX.Element => {
                   </div>
                 </>
                 :
-                <ul className="favorites__list">
-                  {
-                    cities.map((city) => {
+                <>
+                  <h1 className="favorites__title">Saved listing</h1>
+                  <ul className="favorites__list">
+                    {
+                      cities.map((city) => {
 
-                      const cityOffers = favorites.filter((offer) => offer.city.name === city);
+                        const cityOffers = favorites.filter((offer) => offer.city.name === city);
 
-                      return (
-                        <li className="favorites__locations-items" key={city}>
-                          <div className="favorites__locations locations locations--current">
-                            <div className="locations__item">
-                              <a className="locations__item-link" href="#">
-                                <span>{city}</span>
-                              </a>
+                        return (
+                          <li className="favorites__locations-items" key={city}>
+                            <div className="favorites__locations locations locations--current">
+                              <div className="locations__item">
+                                <a className="locations__item-link" href="#">
+                                  <span>{city}</span>
+                                </a>
+                              </div>
                             </div>
-                          </div>
-                          <OffersList offers={cityOffers} />
-                        </li>
-                      );
-                    })
-                  }
-                </ul>
+                            <OffersList offers={cityOffers} />
+                          </li>
+                        );
+                      })
+                    }
+                  </ul>
+                </>
             }
           </section>
         </div>

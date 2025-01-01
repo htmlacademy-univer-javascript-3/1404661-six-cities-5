@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 
 import { Main } from './pages/Main/Main';
 import { Login } from './pages/Login';
@@ -15,18 +15,16 @@ import { AppRoute } from './emuns/app-route.emun';
  * @returns {JSX.Element}
  */
 export const App = (): JSX.Element => (
-  <BrowserRouter>
-    <Routes>
-      <Route path={AppRoute.Main} element={<Main />} />
-      <Route path={AppRoute.Login} element={<Login />} />
-      <Route path={AppRoute.Favorites} element={
-        <PrivateRoute>
-          <Favorites />
-        </PrivateRoute>
-      }
-      />
-      <Route path={AppRoute.Offer} element={<Offer />} />
-      <Route path="*" element={<Error />} />
-    </Routes>
-  </BrowserRouter>
+  <Routes>
+    <Route path={AppRoute.Main} element={<Main />} />
+    <Route path={AppRoute.Login} element={<Login />} />
+    <Route path={AppRoute.Favorites} element={
+      <PrivateRoute>
+        <Favorites />
+      </PrivateRoute>
+    }
+    />
+    <Route path={AppRoute.Offer} element={<Offer />} />
+    <Route path="*" element={<Error />} />
+  </Routes>
 );

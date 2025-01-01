@@ -6,6 +6,6 @@ export enum Actions {
   offers = 'Offers',
   offer = 'Offer',
   favorites = 'Favorites',
-  comment = 'Comment',
+  comment = 'Comments',
   user = 'User'
 }
