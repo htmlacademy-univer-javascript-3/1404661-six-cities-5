@@ -6,13 +6,13 @@ import { ReviewsList } from './ReviewsList';
 import { IComment } from '../../../interfaces/comment.interface';
 
 interface ICommentProps {
-  review: IComment;
+  comment: IComment;
 }
 
 vi.mock('../../atoms/ReviewItem/ReviewItem', () => ({
-  ReviewItem: ({ review }: ICommentProps) => (
+  ReviewItem: ({ comment }: ICommentProps) => (
     <li data-testid="review-item">
-      {review.comment}
+      {comment.comment}
     </li>
   ),
 }));
@@ -28,7 +28,7 @@ describe('ReviewsList', () => {
         isPro: false,
       },
       comment: '1 - Bathed in the nature. Completely unplugged. Unforgettable.',
-      rating: 4.5,
+      rating: 4,
     },
     {
       id: 2,
@@ -39,7 +39,7 @@ describe('ReviewsList', () => {
         isPro: true,
       },
       comment: '2 - Bathed in the nature. Completely unplugged. Unforgettable.',
-      rating: 3.5,
+      rating: 3,
     },
   ];
 

@@ -36,7 +36,7 @@ describe('ReviewItem', () => {
     dateToYearMonthDayMock.mockReturnValue('2023-10-12');
     dateToMonthWordYearMock.mockReturnValue('October 2023');
 
-    render(<ReviewItem {...mockReview} />);
+    render(<ReviewItem comment={mockReview} />);
 
     const avatar = screen.getByAltText('Reviews avatar');
     expect(avatar).toBeInTheDocument();
