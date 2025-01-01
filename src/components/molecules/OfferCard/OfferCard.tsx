@@ -13,6 +13,8 @@ import { useAppSelector } from '../../../store/hooks';
  * @prop {IOffer} offer - Предложение.
  * @prop {(id: string, isFavorite: boolean) => void} onClick - Клик по предложению.
  * @prop {boolean | undefined} isNearPlaces - Предложения рядом?
+ * @prop {MouseEventHandler | undefined} onMouseEnter - Наведение курсором на карточку.
+ * @prop {MouseEventHandler | undefined} onMouseLeave - Уход курсора с карточки.
  */
 interface IOfferProps {
   offer: IOffer;
@@ -24,7 +26,7 @@ interface IOfferProps {
 
 /**
  * Компонент карточки предложения.
- * @param {ICard} params  - Входные парамтеры компонента.
+ * @param {IOfferProps} params  - Входные парамтеры компонента.
  * @returns {JSX.Element}
  */
 export const OfferCard: FC<IOfferProps> = ({
