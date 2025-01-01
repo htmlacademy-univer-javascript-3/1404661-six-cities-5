@@ -7,16 +7,16 @@ import { IForm } from '../../../interfaces/form.interface';
  * Интерфейс компонента формы создания комментария.
  * @prop {(form: IForm) => void} onSubmit - Функция отправки данных.
  */
-interface ICreateCommentForm {
+interface ICommentForm {
   onSubmit: (form: IForm) => void;
 }
 
 /**
  * Компонент формы создания комментария.
- * @param {ICreateCommentForm} params - Входные парамтеры компонента.
+ * @param {ICommentForm} params - Входные парамтеры компонента.
  * @returns {JSX.Element}
  */
-export const CreateCommentForm: FC<ICreateCommentForm> = ({ onSubmit: submit }): JSX.Element => {
+export const CommentForm: FC<ICommentForm> = ({ onSubmit: submit }): JSX.Element => {
   const [form, setForm] = useState<IForm>({ comment: '', rating: 0 });
 
   /** Звездочки. */
@@ -123,4 +123,4 @@ export const CreateCommentForm: FC<ICreateCommentForm> = ({ onSubmit: submit }):
   );
 };
 
-export default CreateCommentForm;
+export default CommentForm;

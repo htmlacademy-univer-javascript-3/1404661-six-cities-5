@@ -21,10 +21,10 @@ const initialState: OffersState = {
 const offersReducer = createReducer(initialState, (builder) => {
   builder
     .addCase(getOffers, (state, action) => {
-      state.offers = action.payload;
+      state.offers = action.payload || [];
     })
     .addCase(setNearbyOffers, (state, action) => {
-      state.nearOffers = action.payload;
+      state.nearOffers = action.payload || [];
     })
     .addCase(clearNearbyOffers, (state) => {
       state.nearOffers = [];

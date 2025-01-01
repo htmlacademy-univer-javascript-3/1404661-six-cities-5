@@ -1,7 +1,7 @@
 import { FC, useCallback, useEffect, useMemo, useState } from 'react';
 import { Navigate, useParams } from 'react-router-dom';
 
-import { CreateCommentForm } from '../components/organisms/CreateCommentForm/CreateCommentForm';
+import { CommentForm } from '../components/organisms/CommentForm/CommentForm';
 import { Map } from '../components/organisms/Map/Map';
 import { ReviewsList } from '../components/molecules/ReviewsList/ReviewsList';
 import { OffersList } from '../components/molecules/OffersList/OffersList';
@@ -218,7 +218,7 @@ export const Offer: FC = (): JSX.Element => {
                   <Spinner />
                 ) : (
                   <ReviewsList reviews={reviews} />)}
-                {isAuthorized && <CreateCommentForm onSubmit={onSubmit} />}
+                {isAuthorized && <CommentForm onSubmit={onSubmit} />}
               </section>
             </div>
           </div>

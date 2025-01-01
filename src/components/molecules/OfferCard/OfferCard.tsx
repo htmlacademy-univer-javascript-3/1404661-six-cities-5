@@ -1,4 +1,4 @@
-import { FC, useMemo } from 'react';
+import { FC, MouseEventHandler, useMemo } from 'react';
 import classNames from 'classnames';
 import { Link } from 'react-router-dom';
 
@@ -10,11 +10,16 @@ import { useAppSelector } from '../../../store/hooks';
 
 /**
  * Интерфейс компонента карточки предложения.
+ * @prop {IOffer} offer - Предложение.
+ * @prop {(id: string, isFavorite: boolean) => void} onClick - Клик по предложению.
  * @prop {boolean | undefined} isNearPlaces - Предложения рядом?
  */
-interface IOfferProps extends IOffer {
+interface IOfferProps {
+  offer: IOffer;
   onClick: (id: string, isFavorite: boolean) => void;
   isNearPlaces?: boolean;
+  onMouseEnter?: MouseEventHandler;
+  onMouseLeave?: MouseEventHandler;
 }
 
 /**
@@ -23,45 +28,44 @@ interface IOfferProps extends IOffer {
  * @returns {JSX.Element}
  */
 export const OfferCard: FC<IOfferProps> = ({
-  id,
-  title,
-  type,
-  previewImage,
-  price,
-  rating,
+  offer,
   onClick,
-  isFavorite = false,
-  isPremium = false,
+  onMouseLeave,
+  onMouseEnter,
   isNearPlaces = false,
 }): JSX.Element => {
 
   const isAuthorized = useAppSelector((state) => state[Actions.user].authorizationStatus);
 
   const card = useMemo(() => (
-    <article className={classNames(isNearPlaces ? 'near-places__card' : 'cities__card', 'place-card')}>
+    <article
+      className={classNames(isNearPlaces ? 'near-places__card' : 'cities__card', 'place-card')}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
+    >
       {
-        isPremium ?
+        offer.isPremium ?
           <div className="place-card__mark">
             <span>Premium</span>
           </div> :
           null
       }
       <div className={classNames(isNearPlaces ? 'near-places__image-wrapper' : 'cities__image-wrapper', 'place-card__image-wrapper')}>
-        <Link to={`/offer/${id}`}>
-          <img className="place-card__image" src={previewImage} width="260" height="200" alt="Place image" />
+        <Link to={`/offer/${offer.id}`}>
+          <img className="place-card__image" src={offer.previewImage} width="260" height="200" alt="Place image" />
         </Link>
       </div>
       <div className="place-card__info">
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
-            <b className="place-card__price-value">&euro;{price}</b>
+            <b className="place-card__price-value">&euro;{offer.price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
           {isAuthorized ?
             <button
-              className={classNames('place-card__bookmark-button', 'button', isFavorite ? 'place-card__bookmark-button--active' : '')}
+              className={classNames('place-card__bookmark-button', 'button', offer.isFavorite ? 'place-card__bookmark-button--active' : '')}
               type="button"
-              onClick={() => onClick(String(id), isFavorite)}
+              onClick={() => onClick(String(offer.id), offer.isFavorite)}
             >
               <svg className="place-card__bookmark-icon" width="18" height="19">
                 <use xlinkHref="#icon-bookmark"></use>
@@ -77,17 +81,17 @@ export const OfferCard: FC<IOfferProps> = ({
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{ 'width': `${Math.floor(rating + 0.5) * 20}%` }}></span>
+            <span style={{ 'width': `${Math.floor(offer.rating + 0.5) * 20}%` }}></span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link to={`/offer/${id}`}>{title}</Link>
+          <Link to={`/offer/${offer.id}`}>{offer.title}</Link>
         </h2>
-        <p className="place-card__type">{type}</p>
+        <p className="place-card__type">{offer.type}</p>
       </div>
     </article >
-  ), [isAuthorized, isFavorite, rating, price, id, isNearPlaces, isPremium, onClick, previewImage, title, type]);
+  ), [isAuthorized, offer, isNearPlaces, onClick, onMouseEnter, onMouseLeave]);
 
   return card;
 };

@@ -13,6 +13,7 @@ import { changeFavorite } from '../../../store/api-actions';
  * @prop {{(selectedOffer: IOffer) => void} | undefined} selectOffer - Функция выбора предложения.
  * @prop {ICard[] | undefined} offers - Предложения.
  * @prop {boolean | undefined} isNearPlaces - Предложения рядом?
+ * @prop {string | undefined} offerPage - Идентификатор страницы предложения.
  */
 export interface IOffersList {
   selectOffer?: (selectedOffer: IOffer | null) => void;
@@ -57,28 +58,20 @@ export const OffersList: FC<IOffersList> = ({ selectOffer, offers, offerPage, is
   }
 
   return (
-    <div className={classNames(isNearPlaces ? 'near-places__list' : 'cities__places-list', 'places__list', !isNearPlaces && 'tabs__content')}>
+    <div
+      className={classNames(isNearPlaces ? 'near-places__list' : 'cities__places-list', 'places__list', !isNearPlaces && 'tabs__content')}
+      data-testid="offer-list-container"
+    >
       {
         offers.map((item) => (
-          <div
+          <OfferCard
+            key={item.id}
+            offer={item}
+            isNearPlaces={isNearPlaces}
+            onClick={onFavoriteClick}
             onMouseEnter={() => selectOffer?.(item)}
             onMouseLeave={() => selectOffer?.(null)}
-            key={item.id}
-          >
-            <OfferCard
-              id={item.id}
-              title={item.title}
-              type={item.type}
-              previewImage={item.previewImage}
-              price={item.price}
-              rating={item.rating}
-              isFavorite={item.isFavorite}
-              isPremium={item.isPremium}
-              isNearPlaces={isNearPlaces}
-              city={item.city}
-              onClick={onFavoriteClick}
-            />
-          </div>
+          />
         ))
       }
     </div>
