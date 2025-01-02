@@ -4,11 +4,11 @@ import * as ReactRouterDom from 'react-router-dom';
 import { datatype } from 'faker';
 import { vi } from 'vitest';
 
-import { Offer } from './Offer';
+import { Offer } from './offer';
 
 import { IOfferFull } from '../../interfaces/offer-full.interface';
 import { PlacementTypes } from '../../emuns/plecement-types.enum';
-import { LoadingStatus } from '../../emuns/statuses.enum';
+import { LoadingStatus } from '../../emuns/loading-statuses.enum';
 
 import { withHistory, withStore } from '../../utils/mock-components';
 import { makeFakeStore } from '../../utils/mock-store';

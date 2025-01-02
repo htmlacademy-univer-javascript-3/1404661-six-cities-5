@@ -1,7 +1,7 @@
 import { Link, useLocation } from 'react-router-dom';
 import { FC, useEffect, useMemo } from 'react';
 
-import { Logo } from '../../atoms/Logo/Logo';
+import { Logo } from '../../atoms/logo/logo';
 
 import { AppRoute } from '../../../emuns/app-route.emun';
 import { Actions } from '../../../emuns/actions.enum';
@@ -50,9 +50,7 @@ export const Header: FC<IHeaderProps> = ({ isAuthorized }): JSX.Element => {
     dispatch(userLogout());
   };
 
-  /**
-   * Количество избранных предложений.
-   */
+  /** Количество избранных предложений.*/
   const favoritesCount = useMemo(() => <span className="header__favorite-count">{favorites && favorites.length}</span>, [favorites]);
 
   return (

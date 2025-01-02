@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import { OffersList } from '../OffersList/OffersList';
+import { OffersList } from '../offers-list/offers-list';
 
 import { IOffer } from '../../../interfaces/offer.interface';
 

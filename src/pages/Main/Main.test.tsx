@@ -1,10 +1,10 @@
 import { render, screen } from '@testing-library/react';
 import { datatype } from 'faker';
 
-import { Main } from './Main';
+import { Main } from './main';
 
 import { IOfferFull } from '../../interfaces/offer-full.interface';
-import { LoadingStatus } from '../../emuns/statuses.enum';
+import { LoadingStatus } from '../../emuns/loading-statuses.enum';
 import { PlacementTypes } from '../../emuns/plecement-types.enum';
 
 import { withHistory, withStore } from '../../utils/mock-components';

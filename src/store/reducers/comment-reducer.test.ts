@@ -1,8 +1,8 @@
 import { IComment } from '../../interfaces/comment.interface';
-import { LoadingStatus } from '../../emuns/statuses.enum';
+import { LoadingStatus } from '../../emuns/loading-statuses.enum';
 
 import { clearComments, setComments, setCommentsLoadingStatus } from '../actions';
-import { commentsReducer } from '../reducers/comment-reducer';
+import { commentsReducer } from './comment-reducer';
 
 describe('commentsReducer', () => {
   const initialState = {

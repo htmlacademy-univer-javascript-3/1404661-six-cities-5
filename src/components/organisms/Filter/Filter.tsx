@@ -1,6 +1,6 @@
 import { FC, useState } from 'react';
 
-import { FilterTypes } from '../../../constants/filters';
+import { FilterTypes } from '../../../emuns/filter-types.enum';
 
 /**
  * Интерфейс компонента фильтра.

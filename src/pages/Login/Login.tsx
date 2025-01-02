@@ -89,9 +89,9 @@ export const Login: FC<ILoginProps> = ({ isAuthorized }): JSX.Element => {
           </section>
           <section className="locations locations--login locations--current">
             <div className="locations__item">
-              <a className="locations__item-link" href="#">
+              <Link to={AppRoute.Main} className="locations__item-link">
                 <span>Paris</span>
-              </a>
+              </Link>
             </div>
           </section>
         </div>

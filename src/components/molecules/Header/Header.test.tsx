@@ -1,8 +1,8 @@
 import { render, screen } from '@testing-library/react';
 
-import { Header } from './Header';
+import { Header } from './header';
 
-import { LoadingStatus } from '../../../emuns/statuses.enum';
+import { LoadingStatus } from '../../../emuns/loading-statuses.enum';
 
 import { withHistory, withStore } from '../../../utils/mock-components';
 import { makeFakeStore } from '../../../utils/mock-store';

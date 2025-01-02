@@ -8,7 +8,7 @@ import { ILogin } from '../interfaces/login.interface.ts';
 import { IOfferFull } from '../interfaces/offer-full.interface.ts';
 import { IComment } from '../interfaces/comment.interface.ts';
 import { IForm } from '../interfaces/form.interface.ts';
-import { LoadingStatus } from '../emuns/statuses.enum.ts';
+import { LoadingStatus } from '../emuns/loading-statuses.enum.ts';
 import { Actions } from '../emuns/actions.enum.ts';
 
 import {

@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { datatype } from 'faker';
 
-import { FavoritesList } from './FavoritesList';
+import { FavoritesList } from './favorites-list';
 
 import { withHistory, withStore } from '../../../utils/mock-components';
 import { mockOffer } from '../../../mocks/mock-store-data';

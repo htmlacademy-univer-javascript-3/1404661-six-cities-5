@@ -1,12 +1,12 @@
 import { FC } from 'react';
 import { Link, Navigate } from 'react-router-dom';
 
-import { Header } from '../../components/molecules/Header/Header';
-import { FavoritesList } from '../../components/molecules/FavoritesList/FavoritesList';
+import { Header } from '../../components/molecules/header/header';
+import { FavoritesList } from '../../components/molecules/favorites-list/favorites-list';
 
 import { AppRoute } from '../../emuns/app-route.emun';
 import { Actions } from '../../emuns/actions.enum';
-import { LoadingStatus } from '../../emuns/statuses.enum';
+import { LoadingStatus } from '../../emuns/loading-statuses.enum';
 
 import { useAppSelector } from '../../store/hooks';
 

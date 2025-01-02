@@ -110,7 +110,7 @@ export const CommentForm: FC<ICommentFormProps> = ({ onSubmit: submit }): JSX.El
           );
         })}
       </div>
-      <textarea className="reviews__textarea form__textarea" id="review" name="comment" placeholder="Tell how was your stay, what you like and what can be improved" onChange={(e) => handleInputChange('comment', e.target.value)}></textarea>
+      <textarea className="reviews__textarea form__textarea" id="review" maxLength={300} value={form.comment} name="comment" placeholder="Tell how was your stay, what you like and what can be improved" onChange={(e) => handleInputChange('comment', e.target.value)}></textarea>
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
           To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">50 characters</b>.
@@ -122,5 +122,3 @@ export const CommentForm: FC<ICommentFormProps> = ({ onSubmit: submit }): JSX.El
     </form >
   );
 };
-
-export default CommentForm;

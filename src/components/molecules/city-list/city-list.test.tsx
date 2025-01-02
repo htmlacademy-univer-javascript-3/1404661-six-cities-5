@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { vi } from 'vitest';
 
-import { CityList } from './CityList';
+import { CityList } from './city-list';
 
 import { useAppDispatch, useAppSelector } from '../../../store/hooks';
 import { changeCity } from '../../../store/actions';

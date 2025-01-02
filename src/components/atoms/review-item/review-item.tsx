@@ -1,10 +1,10 @@
 import { FC } from 'react';
 
-import { Rating } from '../Rating/Rating';
+import { Rating } from '../rating/rating';
 
 import { IComment } from '../../../interfaces/comment.interface';
 
-import { dateToMonthWordYear, dateToYearMonthDay } from '../../../helpers/dates';
+import { convertDateToMonthWordYear, convertDateToYearMonthDay } from '../../../helpers/convert-dates.helper';
 
 /**
  * Компонент списка отзывов.
@@ -30,7 +30,7 @@ export const ReviewItem: FC<IReviewItemProps> = ({ comment }) => (
     <div className="reviews__info">
       <Rating score={comment.rating} hasText={false} />
       <p className="reviews__text">{comment.comment}</p>
-      <time className="reviews__time" dateTime={dateToYearMonthDay(new Date(comment.date))}>{dateToMonthWordYear(new Date(comment.date))}</time>
+      <time className="reviews__time" dateTime={convertDateToYearMonthDay(new Date(comment.date))}>{convertDateToMonthWordYear(new Date(comment.date))}</time>
     </div>
   </li>
 );

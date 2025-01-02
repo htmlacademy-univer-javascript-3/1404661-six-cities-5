@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { useRef } from 'react';
 
-import useMap from './useMap.tsx';
+import useMap from './use-map.tsx';
 
 import { ICity } from '../interfaces/city.interface.ts';
 

@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { describe, it } from 'vitest';
 
-import { Map } from './Map.tsx';
+import { Map } from './map.tsx';
 
 import { IOffer } from '../../../interfaces/offer.interface.ts';
 import { PlacementTypes } from '../../../emuns/plecement-types.enum.ts';

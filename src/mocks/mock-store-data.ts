@@ -1,6 +1,6 @@
 import { datatype, internet } from 'faker';
 
-import { LoadingStatus } from '../emuns/statuses.enum';
+import { LoadingStatus } from '../emuns/loading-statuses.enum';
 import { PlacementTypes } from '../emuns/plecement-types.enum';
 
 import { CITIES } from '../constants/cities';

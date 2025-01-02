@@ -3,7 +3,7 @@
  * @param {Date} date - Дата.
  * @returns string.
  */
-export const dateToYearMonthDay = (date: Date) =>
+export const convertDateToYearMonthDay = (date: Date) =>
   new Intl.DateTimeFormat('en-CA', {
     year: 'numeric',
     month: '2-digit',
@@ -15,7 +15,7 @@ export const dateToYearMonthDay = (date: Date) =>
 * @param {Date} date - Дата.
 * @returns string.
 */
-export const dateToMonthWordYear = (date: Date) =>
+export const convertDateToMonthWordYear = (date: Date) =>
   new Intl.DateTimeFormat('en-CA', {
     year: 'numeric',
     month: 'long'

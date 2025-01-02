@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { vi } from 'vitest';
 
-import CommentForm from './CommentForm';
+import { CommentForm } from './comment-form';
 
 type ICommentRatingProps = {
   onChange: (field: string, value: number) => void;

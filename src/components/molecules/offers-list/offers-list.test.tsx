@@ -3,7 +3,7 @@ import { render, screen } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { vi } from 'vitest';
 
-import { OffersList } from './OffersList';
+import { OffersList } from './offers-list';
 
 import { IOffer } from '../../../interfaces/offer.interface';
 import { PlacementTypes } from '../../../emuns/plecement-types.enum';
@@ -16,7 +16,7 @@ interface IOfferCardProps {
   onMouseLeave?: MouseEventHandler;
 }
 
-vi.mock('../OfferCard/OfferCard', () => ({
+vi.mock('../offer-card/offer-card', () => ({
   OfferCard: ({ offer, onMouseEnter, onMouseLeave }: IOfferCardProps) => (
     <div
       data-testid="offer-item"

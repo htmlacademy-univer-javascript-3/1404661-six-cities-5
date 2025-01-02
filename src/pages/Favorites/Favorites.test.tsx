@@ -1,8 +1,8 @@
 import { render, screen } from '@testing-library/react';
 
-import { Favorites } from './Favorites';
+import { Favorites } from './favorites';
 
-import { LoadingStatus } from '../../emuns/statuses.enum';
+import { LoadingStatus } from '../../emuns/loading-statuses.enum';
 
 import { makeFakeStore } from '../../utils/mock-store';
 import { withHistory, withStore } from '../../utils/mock-components';

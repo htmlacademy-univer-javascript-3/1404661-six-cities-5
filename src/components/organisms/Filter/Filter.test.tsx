@@ -1,9 +1,9 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import { vi } from 'vitest';
 
-import { Filter } from './Filter';
+import { Filter } from './filter';
 
-import { FilterTypes } from '../../../constants/filters';
+import { FilterTypes } from '../../../emuns/filter-types.enum';
 
 describe('Filter', () => {
   it('should render Filter correctly with current filter', () => {

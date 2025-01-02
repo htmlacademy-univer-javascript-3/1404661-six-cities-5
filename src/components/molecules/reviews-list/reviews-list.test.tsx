@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { vi } from 'vitest';
 
-import { ReviewsList } from './ReviewsList';
+import { ReviewsList } from './reviews-list';
 
 import { IComment } from '../../../interfaces/comment.interface';
 
@@ -9,7 +9,7 @@ interface ICommentProps {
   comment: IComment;
 }
 
-vi.mock('../../atoms/ReviewItem/ReviewItem', () => ({
+vi.mock('../../atoms/review-item/review-item', () => ({
   ReviewItem: ({ comment }: ICommentProps) => (
     <li data-testid="review-item">
       {comment.comment}

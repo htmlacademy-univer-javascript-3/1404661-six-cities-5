@@ -4,20 +4,21 @@ import 'leaflet/dist/leaflet.css';
 
 import { IOffer } from '../../../interfaces/offer.interface';
 import { ICity } from '../../../interfaces/city.interface';
+import { IOfferFull } from '../../../interfaces/offer-full.interface';
 
-import useMap from '../../../hooks/useMap';
-import { currentCustomIcon, defaultCustomIcon } from '../../../constants/MapsPoint';
+import useMap from '../../../hooks/use-map';
+import { CURRENT_ICON, DEFAULT_ICON } from '../../../constants/maps-point';
 
 /**
  * Интерфейс компонента карты.
  * @prop {ICity} currentCity - Текущий город.
  * @prop {IOffer[]} offers - Пердложения.
- * @prop {IOffer | null | undefined} selectedOffer - Выбранное предложение.
+ * @prop {IOffer | IOfferFull | null | undefined} selectedOffer - Выбранное предложение.
  */
 interface IMapProps {
   currentCity: ICity;
   offers: IOffer[];
-  selectedOffer?: IOffer | null;
+  selectedOffer?: IOffer | IOfferFull | null;
 }
 
 /**
@@ -34,6 +35,7 @@ export const Map: FC<IMapProps> = ({
 
   const map = useMap(mapRef, currentCity && currentCity.location);
 
+
   /* Эффектит установку иконок на карте. */
   useEffect(() => {
     if (map) {
@@ -48,8 +50,8 @@ export const Map: FC<IMapProps> = ({
         marker
           .setIcon(
             selectedOffer && selectedOffer.id === offer.id
-              ? currentCustomIcon
-              : defaultCustomIcon
+              ? CURRENT_ICON
+              : DEFAULT_ICON
           )
           .addTo(markerLayer);
       });

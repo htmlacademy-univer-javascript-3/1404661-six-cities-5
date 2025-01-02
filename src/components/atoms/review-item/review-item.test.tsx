@@ -1,17 +1,17 @@
 import { render, screen } from '@testing-library/react';
 import { vi } from 'vitest';
 
-import { ReviewItem } from './ReviewItem';
+import { ReviewItem } from './review-item';
 
 import { IComment } from '../../../interfaces/comment.interface';
 
-import * as dateUtils from '../../../helpers/dates';
+import * as dateUtils from '../../../helpers/convert-dates.helper';
 
-vi.mock('../Rating/Rating', () => ({
+vi.mock('../rating/rating', () => ({
   Rating: () => <div data-testid="rating" />,
 }));
 
-vi.mock('../../../helpers/dates', () => ({
+vi.mock('../../../helpers/dates.helper', () => ({
   dateToYearMonthDay: vi.fn(),
   dateToMonthWordYear: vi.fn(),
 }));
@@ -30,8 +30,8 @@ describe('ReviewItem', () => {
   };
 
   it('should render ReviewItem correctly', () => {
-    const dateToYearMonthDayMock = dateUtils.dateToYearMonthDay as jest.Mock;
-    const dateToMonthWordYearMock = dateUtils.dateToMonthWordYear as jest.Mock;
+    const dateToYearMonthDayMock = dateUtils.convertDateToYearMonthDay as jest.Mock;
+    const dateToMonthWordYearMock = dateUtils.convertDateToMonthWordYear as jest.Mock;
 
     dateToYearMonthDayMock.mockReturnValue('2023-10-12');
     dateToMonthWordYearMock.mockReturnValue('October 2023');

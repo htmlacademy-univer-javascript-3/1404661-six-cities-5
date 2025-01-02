@@ -2,16 +2,15 @@ import { render, screen } from '@testing-library/react';
 import { datatype } from 'faker';
 import { MemoryHistory, createMemoryHistory } from 'history';
 
-import { App } from './App.tsx';
+import { App } from './app.tsx';
 
 import { AppRoute } from '../emuns/app-route.emun.ts';
-import { LoadingStatus } from '../emuns/statuses.enum.ts';
+import { LoadingStatus } from '../emuns/loading-statuses.enum.ts';
 import { PlacementTypes } from '../emuns/plecement-types.enum.ts';
 
 import { makeFakeStore } from '../utils/mock-store.ts';
 import { withHistory, withStore } from '../utils/mock-components.tsx';
 import { mockUser } from '../mocks/mock-store-data.ts';
-
 
 describe('App', () => {
   let mockHistory: MemoryHistory;
@@ -34,7 +33,6 @@ describe('App', () => {
     expect(screen.getByText(/places to stay/i)).toBeInTheDocument();
   });
 
-
   it('should render "Login" page when user navigate to "/login"', () => {
     const withHistoryComponent = withHistory(<App />, mockHistory);
     const { withStoreComponent } = withStore(withHistoryComponent, makeFakeStore());
@@ -43,18 +41,15 @@ describe('App', () => {
     const emailFormTestId = 'emailElement';
     const passwordFormTestId = 'passwordElement';
 
-
     render(withStoreComponent);
     const loginForm = screen.getByTestId(loginFormTestId);
     const emailForm = screen.getByTestId(emailFormTestId);
     const passwordForm = screen.getByTestId(passwordFormTestId);
 
-
     expect(loginForm).toBeInTheDocument();
     expect(emailForm).toBeInTheDocument();
     expect(passwordForm).toBeInTheDocument();
   });
-
 
   it('should render "Main" page when authorized user navigates to "/login"', () => {
     const cityListTestId = 'city-list';
@@ -111,12 +106,10 @@ describe('App', () => {
     const emailFormTestId = 'emailElement';
     const passwordFormTestId = 'passwordElement';
 
-
     render(withStoreComponent);
     const loginForm = screen.getByTestId(loginFormTestId);
     const emailForm = screen.getByTestId(emailFormTestId);
     const passwordForm = screen.getByTestId(passwordFormTestId);
-
 
     expect(loginForm).toBeInTheDocument();
     expect(emailForm).toBeInTheDocument();

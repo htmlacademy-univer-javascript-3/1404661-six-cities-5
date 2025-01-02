@@ -1,22 +1,23 @@
-import { FC, useCallback, useEffect, useMemo } from 'react';
+import { FC, useCallback, useEffect, useMemo, useState } from 'react';
 import { Navigate, useParams } from 'react-router-dom';
 import classNames from 'classnames';
 
-import { CommentForm } from '../../components/organisms/CommentForm/CommentForm';
-import { Map } from '../../components/organisms/Map/Map';
-import { ReviewsList } from '../../components/molecules/ReviewsList/ReviewsList';
-import { OffersList } from '../../components/molecules/OffersList/OffersList';
-import { Header } from '../../components/molecules/Header/Header';
-import { Spinner } from '../../components/atoms/Spinner/Spinner';
-import { Rating } from '../../components/atoms/Rating/Rating';
+import { CommentForm } from '../../components/organisms/comment-form/comment-form';
+import { Map } from '../../components/organisms/map/map';
+import { ReviewsList } from '../../components/molecules/reviews-list/reviews-list';
+import { OffersList } from '../../components/molecules/offers-list/offers-list';
+import { Header } from '../../components/molecules/header/header';
+import { Spinner } from '../../components/atoms/spinner/spinner';
+import { Rating } from '../../components/atoms/rating/rating';
 
 import { IForm } from '../../interfaces/form.interface';
-import { LoadingStatus } from '../../emuns/statuses.enum';
+import { LoadingStatus } from '../../emuns/loading-statuses.enum';
 import { Actions } from '../../emuns/actions.enum';
 
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { createComment, fetchComments, fetchOffer, fetchOffersNearby } from '../../store/api-actions';
 import { clearComments, clearNearbyOffers, clearOffer } from '../../store/actions';
+import { convertToOffer } from '../../helpers/convert-to-offer.helper';
 
 /**
  * Интерфейс компонента страницы предложения.
@@ -34,6 +35,9 @@ interface IOfferProps {
  * @returns {JSX.Element}
  */
 export const Offer: FC<IOfferProps> = ({ isAuthorized, onFavouriteClick }): JSX.Element => {
+
+  const [isSendingError, setIsSendingError] = useState<boolean>(false);
+
   const { id } = useParams();
 
   const dispatch = useAppDispatch();
@@ -44,7 +48,7 @@ export const Offer: FC<IOfferProps> = ({ isAuthorized, onFavouriteClick }): JSX.
 
   const isOfferDataLoading = useAppSelector((state) => state[Actions.offer].isOfferDataLoading);
 
-  const nearOffers = useAppSelector((state) => state[Actions.offers].nearOffers);
+  const nearOffers = useAppSelector((state) => state[Actions.offers].nearOffers).slice(0, 3);
 
   const isOffersDataLoading = useAppSelector((state) => state[Actions.offers].isOffersDataLoading);
 
@@ -91,7 +95,13 @@ export const Offer: FC<IOfferProps> = ({ isAuthorized, onFavouriteClick }): JSX.
       return;
     }
 
-    dispatch(createComment({ offerId: String(offer.id), form }));
+    dispatch(createComment({ offerId: String(offer.id), form })).catch(() => {
+      setIsSendingError(true);
+
+      setTimeout(() => {
+        setIsSendingError(false);
+      }, 5000);
+    });
 
     if (!id) {
       return;
@@ -231,12 +241,13 @@ export const Offer: FC<IOfferProps> = ({ isAuthorized, onFavouriteClick }): JSX.
                   <Spinner />
                 ) : (
                   <ReviewsList reviews={reviews} />)}
+                {isSendingError && <span style={{ color: 'red' }}>Oops, have some problem with sending comment</span>}
                 {isAuthorized && <CommentForm onSubmit={onSubmit} />}
               </section>
             </div>
           </div>
           <section className="offer__map map" data-testid="map">
-            <Map currentCity={city} offers={nearOffers} />
+            {offer && <Map currentCity={city} offers={[...nearOffers, convertToOffer(offer)]} selectedOffer={offer} />}
           </section>
         </section>
         <div className="container">

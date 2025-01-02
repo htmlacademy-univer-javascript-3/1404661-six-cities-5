@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import { ReviewItem } from '../../atoms/ReviewItem/ReviewItem';
+import { ReviewItem } from '../../atoms/review-item/review-item';
 
 import { IComment } from '../../../interfaces/comment.interface';
 

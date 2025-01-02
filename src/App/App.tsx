@@ -1,11 +1,11 @@
 import { Route, Routes } from 'react-router-dom';
 
-import { Main } from '../pages/Main/Main';
-import { Login } from '../pages/Login/Login';
-import { Favorites } from '../pages/Favorites/Favorites';
-import { Offer } from '../pages/Offer/Offer';
-import { Error } from '../pages/Error/Error';
-import { PrivateRoute } from '../components/molecules/PrivateRoute/PrivateRoute';
+import { Main } from '../pages/main/main';
+import { Login } from '../pages/login/login';
+import { Favorites } from '../pages/favorites/favorites';
+import { Offer } from '../pages/offer/offer';
+import { Error } from '../pages/error/error';
+import { PrivateRoute } from '../components/molecules/private-route/private-route';
 
 import { AppRoute } from '../emuns/app-route.emun';
 import { Actions } from '../emuns/actions.enum';
@@ -29,7 +29,7 @@ export const App = (): JSX.Element => {
   * @param {boolean | undefined} favoriteStatus - Статус предложения.
   * @param {string | undefined} offerPageId - Идентификатор страницы предложения.
   */
-  const onFavoriteClick = (offerId: string, favoriteStatus?: boolean, offerPageId?: string) => {
+  const handleFavoriteClick = (offerId: string, favoriteStatus?: boolean, offerPageId?: string) => {
     dispatch(
       changeFavorite({
         offerId: offerId,
@@ -55,7 +55,7 @@ export const App = (): JSX.Element => {
         </PrivateRoute>
       }
       />
-      <Route path={AppRoute.Offer} element={<Offer isAuthorized={isAuthorized} onFavouriteClick={onFavoriteClick} />} />
+      <Route path={AppRoute.Offer} element={<Offer isAuthorized={isAuthorized} onFavouriteClick={handleFavoriteClick} />} />
       <Route path="*" element={<Error />} />
     </Routes>
   );

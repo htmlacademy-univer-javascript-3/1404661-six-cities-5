@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 import { Route, Routes } from 'react-router-dom';
 import { createMemoryHistory, MemoryHistory } from 'history';
 
-import { PrivateRoute } from './PrivateRoute';
+import { PrivateRoute } from './private-route';
 
 import { AppRoute } from '../../../emuns/app-route.emun';
 

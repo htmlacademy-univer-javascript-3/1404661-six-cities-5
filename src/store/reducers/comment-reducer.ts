@@ -1,7 +1,7 @@
 import { createReducer } from '@reduxjs/toolkit';
 
 import { IComment } from '../../interfaces/comment.interface';
-import { LoadingStatus } from '../../emuns/statuses.enum';
+import { LoadingStatus } from '../../emuns/loading-statuses.enum';
 
 import { clearComments, setComments, setCommentsLoadingStatus } from '../actions';
 

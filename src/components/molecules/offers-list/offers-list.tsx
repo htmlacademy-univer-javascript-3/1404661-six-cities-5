@@ -1,7 +1,7 @@
 import { FC, useCallback } from 'react';
 import classNames from 'classnames';
 
-import { OfferCard } from '../OfferCard/OfferCard';
+import { OfferCard } from '../offer-card/offer-card';
 
 import { IOffer } from '../../../interfaces/offer.interface';
 

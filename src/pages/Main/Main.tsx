@@ -1,18 +1,18 @@
 import { FC, useMemo, useState } from 'react';
 
-import { Map } from '../../components/organisms/Map/Map';
-import { Filter } from '../../components/organisms/Filter/Filter';
-import { OffersList } from '../../components/molecules/OffersList/OffersList';
-import { CityList } from '../../components/molecules/CityList/CityList';
-import { Header } from '../../components/molecules/Header/Header';
-import { Spinner } from '../../components/atoms/Spinner/Spinner';
+import { Map } from '../../components/organisms/map/map';
+import { Filter } from '../../components/organisms/filter/filter';
+import { OffersList } from '../../components/molecules/offers-list/offers-list';
+import { CityList } from '../../components/molecules/city-list/city-list';
+import { Header } from '../../components/molecules/header/header';
+import { Spinner } from '../../components/atoms/spinner/spinner';
 
 import { IOffer } from '../../interfaces/offer.interface';
-import { LoadingStatus } from '../../emuns/statuses.enum';
+import { LoadingStatus } from '../../emuns/loading-statuses.enum';
 import { Actions } from '../../emuns/actions.enum';
 
 import { useAppSelector } from '../../store/hooks';
-import { FilterTypes } from '../../constants/filters';
+import { FilterTypes } from '../../emuns/filter-types.enum';
 
 import './Main.css';
 

@@ -2,7 +2,7 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import { vi } from 'vitest';
 
-import { OfferCard } from './OfferCard';
+import { OfferCard } from './offer-card';
 
 import { IOffer } from '../../../interfaces/offer.interface';
 import { PlacementTypes } from '../../../emuns/plecement-types.enum';

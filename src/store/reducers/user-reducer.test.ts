@@ -1,7 +1,7 @@
 import { IUserFull } from '../../interfaces/user.inretface';
+
 import { clearUserData, setAuthorizationStatus, setUserData } from '../actions';
 import { userReducer } from '../reducers/user-reducer';
-
 
 describe('userReducer', () => {
   const initialState = {
