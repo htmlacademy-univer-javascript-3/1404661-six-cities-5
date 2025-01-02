@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 import { datatype } from 'faker';
 import { MemoryHistory, createMemoryHistory } from 'history';
 
-import { App } from './app.tsx';
+import { App } from './app';
 
 import { AppRoute } from './emuns/app-route.emun.ts';
 import { PlacementTypes } from './emuns/plecement-types.enum.ts';
