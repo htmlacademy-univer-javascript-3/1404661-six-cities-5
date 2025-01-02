@@ -4,14 +4,21 @@ import { CITIES } from '../../constants/cities';
 import { changeCity } from '../actions';
 import { cityReducer } from '../reducers/city-reducer';
 
-
 describe('cityReducer', () => {
   const initialState = {
     city: CITIES.Paris
   };
 
   it('should return the initial state by default', () => {
-    expect(cityReducer(undefined, { type: undefined })).toEqual(initialState);
+    const emptyAction = { type: '' };
+
+    expect(cityReducer(undefined, emptyAction)).toEqual(initialState);
+  });
+
+  it('should return the initial state with empty action', () => {
+    const emptyAction = { type: '' };
+
+    expect(cityReducer(initialState, emptyAction)).toEqual(initialState);
   });
 
   it('should handle changeCity action', () => {

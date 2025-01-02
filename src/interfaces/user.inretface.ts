@@ -2,6 +2,7 @@
  * Интерфейс пользователя.
  * @prop {string} avatar- Аватар.
  * @prop {string} name - Имя.
+ * @prop {boolean} isPro - Пользователь про?
  */
 export interface IUser {
   avatarUrl: string;

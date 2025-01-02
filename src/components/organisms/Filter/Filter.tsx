@@ -22,7 +22,7 @@ export const Filter: FC<IFilterProps> = ({ currentFilter, onChange }): JSX.Eleme
   const [isActive, setActive] = useState(false);
 
   return (
-    <form className="places__sorting" action="#" method="get">
+    <form className="places__sorting" action="#" method="get" data-testid='filter-form'>
       <span className="places__sorting-caption">Sort by </span>
       <span className="places__sorting-type" tabIndex={0}
         onClick={() => setActive((active) => !active)}

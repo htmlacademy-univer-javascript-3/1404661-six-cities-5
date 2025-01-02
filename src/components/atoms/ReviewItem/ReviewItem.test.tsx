@@ -29,7 +29,7 @@ describe('ReviewItem', () => {
     rating: 4.5,
   };
 
-  it('should render correctly', () => {
+  it('should render ReviewItem correctly', () => {
     const dateToYearMonthDayMock = dateUtils.dateToYearMonthDay as jest.Mock;
     const dateToMonthWordYearMock = dateUtils.dateToMonthWordYear as jest.Mock;
 

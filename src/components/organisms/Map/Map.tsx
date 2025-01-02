@@ -32,7 +32,7 @@ export const Map: FC<IMapProps> = ({
 }) => {
   const mapRef = useRef(null);
 
-  const map = useMap(mapRef, currentCity.location);
+  const map = useMap(mapRef, currentCity && currentCity.location);
 
   /* Эффектит установку иконок на карте. */
   useEffect(() => {
@@ -60,5 +60,5 @@ export const Map: FC<IMapProps> = ({
     }
   }, [map, offers, selectedOffer, currentCity]);
 
-  return <div style={{ height: '500px' }} ref={mapRef}></div>;
+  return <div style={{ height: '500px' }} ref={mapRef} data-testid='map-test'></div>;
 };

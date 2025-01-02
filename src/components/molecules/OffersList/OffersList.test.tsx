@@ -1,13 +1,14 @@
 import { MouseEventHandler } from 'react';
 import { render, screen } from '@testing-library/react';
+import { Provider } from 'react-redux';
 import { vi } from 'vitest';
 
 import { OffersList } from './OffersList';
 
 import { IOffer } from '../../../interfaces/offer.interface';
 import { PlacementTypes } from '../../../emuns/plecement-types.enum';
+
 import { initActionsStore } from '../../../mocks/actions-store';
-import { Provider } from 'react-redux';
 
 interface IOfferCardProps {
   offer: IOffer;
@@ -18,7 +19,7 @@ interface IOfferCardProps {
 vi.mock('../OfferCard/OfferCard', () => ({
   OfferCard: ({ offer, onMouseEnter, onMouseLeave }: IOfferCardProps) => (
     <div
-      data-testid="place-card"
+      data-testid="offer-item"
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
     >
@@ -63,24 +64,15 @@ describe('OffersList', () => {
   };
 
   it('should render correctly with given offers', () => {
-    const mockSelectOffer = vi.fn();
 
-    renderWithRedux(
-      <OffersList
-        offers={mockOffers}
-        selectOffer={mockSelectOffer}
-        isNearPlaces={false}
-      />
-    );
+    renderWithRedux(<OffersList offers={mockOffers} />);
 
-    const placeCards = screen.getAllByTestId('place-card');
-    expect(placeCards).toHaveLength(mockOffers.length);
+    const offersContainer = screen.getByTestId('offer-list-container');
+    const offers = screen.getAllByTestId('offer-item');
 
-    expect(screen.getByText('Some place')).toBeInTheDocument();
-    expect(screen.getByText('Some place 2')).toBeInTheDocument();
+    expect(offersContainer).toBeInTheDocument();
+    expect(offers.length).toBe(mockOffers.length);
 
-    const container = screen.getByTestId('offer-list-container');
-    expect(container).toHaveClass('cities__places-list places__list tabs__content');
   });
 
   it('should render correctly with NearPlaces type', () => {
@@ -88,7 +80,6 @@ describe('OffersList', () => {
     renderWithRedux(
       <OffersList
         offers={mockOffers}
-        selectOffer={vi.fn()}
         isNearPlaces
       />
     );

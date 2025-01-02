@@ -1,5 +1,5 @@
 /**
- * Запросы API.
+ * Роуты.
  */
 export const API_ROUTES = {
   OFFERS: {

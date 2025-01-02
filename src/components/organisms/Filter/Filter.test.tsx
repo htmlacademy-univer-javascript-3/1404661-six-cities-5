@@ -1,11 +1,12 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import { vi } from 'vitest';
+
 import { Filter } from './Filter';
+
 import { FilterTypes } from '../../../constants/filters';
 
-
-describe('SortFilter', () => {
-  it('should render correctly with current filter', () => {
+describe('Filter', () => {
+  it('should render Filter correctly with current filter', () => {
     const mockOnFilterChange = vi.fn();
 
     render(<Filter currentFilter={FilterTypes.popular} onChange={mockOnFilterChange} />);

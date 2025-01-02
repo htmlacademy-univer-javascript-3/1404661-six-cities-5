@@ -13,7 +13,7 @@ vi.mock('../../../store/hooks', () => ({
 }));
 
 describe('CityList', () => {
-  it('should render correctly and handle city click', () => {
+  it('should render CityList correctly and handle city click', () => {
     const mockDispatch = vi.fn();
     (useAppDispatch as jest.Mock).mockReturnValue(mockDispatch);
 

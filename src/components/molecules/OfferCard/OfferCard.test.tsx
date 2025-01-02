@@ -6,18 +6,19 @@ import { OfferCard } from './OfferCard';
 
 import { IOffer } from '../../../interfaces/offer.interface';
 import { PlacementTypes } from '../../../emuns/plecement-types.enum';
+
 import { useAppDispatch, useAppSelector } from '../../../store/hooks';
 
-vi.mock('../../store/hooks', () => ({
+vi.mock('../../../store/hooks', () => ({
   useAppDispatch: vi.fn(),
   useAppSelector: vi.fn(),
 }));
 
-vi.mock('../Rating/Rating', () => ({
+vi.mock('../../atoms/Rating/Rating', () => ({
   Rating: () => <div data-testid="rating" />,
 }));
 
-describe('PlaceCard', () => {
+describe('OfferCard', () => {
   const mockPlace: IOffer = {
     id: 1,
     title: 'Some place',
@@ -31,7 +32,7 @@ describe('PlaceCard', () => {
     previewImage: 'img1.jpg',
   };
 
-  it('should render correctly with premium status', () => {
+  it('should render OfferCard correctly with premium status', () => {
     const mockDispatch = vi.fn();
     (useAppDispatch as jest.Mock).mockReturnValue(mockDispatch);
     (useAppSelector as jest.Mock).mockReturnValue(true);
@@ -52,7 +53,7 @@ describe('PlaceCard', () => {
 
     expect(screen.getByText('Some place')).toBeInTheDocument();
 
-    const image = screen.getByAltText('Alt');
+    const image = screen.getByAltText('Place image');
     expect(image).toBeInTheDocument();
     expect(image).toHaveAttribute('src', 'img1.jpg');
     expect(image).toHaveAttribute('width', '260');
@@ -74,7 +75,7 @@ describe('PlaceCard', () => {
       </MemoryRouter>
     );
 
-    const card = screen.getByText('Beautiful place').closest('article');
+    const card = screen.getByText('Some place').closest('article');
     fireEvent.mouseOver(card!);
     fireEvent.mouseLeave(card!);
 
@@ -86,7 +87,6 @@ describe('PlaceCard', () => {
 
   it('should call onClick correctly', () => {
     const mockOnClick = vi.fn();
-    (useAppSelector as jest.Mock).mockReturnValue(false);
 
     render(
       <MemoryRouter>
@@ -97,8 +97,12 @@ describe('PlaceCard', () => {
       </MemoryRouter>
     );
 
+    const bookmarkButton = screen.getByRole('button', { name: /To bookmarks/i });
+
+    fireEvent.click(bookmarkButton);
+
     expect(mockOnClick).toHaveBeenCalledTimes(1);
-    expect(mockOnClick).toHaveBeenCalledWith(expect.anything());
+    expect(mockOnClick).toHaveBeenCalledWith(String(mockPlace.id), mockPlace.isFavorite);
 
   });
 

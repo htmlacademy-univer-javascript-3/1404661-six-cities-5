@@ -5,7 +5,7 @@ import thunk, { ThunkDispatch } from 'redux-thunk';
 import { State } from '../store/state';
 import { createAPI } from '../api/axios-api';
 
-type AppThunkDispatch = ThunkDispatch<State, ReturnType<typeof createAPI>, Action>;
+export type AppThunkDispatch = ThunkDispatch<State, ReturnType<typeof createAPI>, Action>;
 
 export const initActionsStore = () => {
   const axios = createAPI();

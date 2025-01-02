@@ -1,37 +1,42 @@
-import { FC, useCallback, useEffect, useMemo, useState } from 'react';
+import { FC, useCallback, useEffect, useMemo } from 'react';
 import { Navigate, useParams } from 'react-router-dom';
-
-import { CommentForm } from '../components/organisms/CommentForm/CommentForm';
-import { Map } from '../components/organisms/Map/Map';
-import { ReviewsList } from '../components/molecules/ReviewsList/ReviewsList';
-import { OffersList } from '../components/molecules/OffersList/OffersList';
-import { Header } from '../components/molecules/Header/Header';
-import { Spinner } from '../components/atoms/Spinner/Spinner';
-import { Rating } from '../components/atoms/Rating/Rating';
-
-import { IOffer } from '../interfaces/offer.interface';
-import { IForm } from '../interfaces/form.interface';
-import { LoadingStatus } from '../emuns/statuses.enum';
-import { Actions } from '../emuns/actions.enum';
-
-import { useAppDispatch, useAppSelector } from '../store/hooks';
-import { changeFavorite, createComment, fetchComments, fetchOffer, fetchOffersNearby } from '../store/api-actions';
-import { clearComments, clearNearbyOffers, clearOffer } from '../store/actions';
 import classNames from 'classnames';
+
+import { CommentForm } from '../../components/organisms/CommentForm/CommentForm';
+import { Map } from '../../components/organisms/Map/Map';
+import { ReviewsList } from '../../components/molecules/ReviewsList/ReviewsList';
+import { OffersList } from '../../components/molecules/OffersList/OffersList';
+import { Header } from '../../components/molecules/Header/Header';
+import { Spinner } from '../../components/atoms/Spinner/Spinner';
+import { Rating } from '../../components/atoms/Rating/Rating';
+
+import { IForm } from '../../interfaces/form.interface';
+import { LoadingStatus } from '../../emuns/statuses.enum';
+import { Actions } from '../../emuns/actions.enum';
+
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import { createComment, fetchComments, fetchOffer, fetchOffersNearby } from '../../store/api-actions';
+import { clearComments, clearNearbyOffers, clearOffer } from '../../store/actions';
+
+/**
+ * Интерфейс компонента страницы предложения.
+ * @prop {boolean} isAuthorized -  Авторизован ли пользователь?
+ * @prop {(offerId: string, favoriteStatus?: boolean, offerPageId?: string) => void} onFavouriteClick - Функция добавления в избранное и удаление из избранного.
+ */
+interface IOfferProps {
+  isAuthorized: boolean;
+  onFavouriteClick: (offerId: string, favoriteStatus?: boolean, offerPageId?: string) => void;
+}
 
 /**
  * Компонент страницы предложения.
  * @param {IOfferProps} params - Входные парамтеры компонента.
  * @returns {JSX.Element}
  */
-export const Offer: FC = (): JSX.Element => {
-  const [selectedOffer, setSelectedPoint] = useState<IOffer | null>(null);
-
+export const Offer: FC<IOfferProps> = ({ isAuthorized, onFavouriteClick }): JSX.Element => {
   const { id } = useParams();
 
   const dispatch = useAppDispatch();
-
-  const isAuthorized = useAppSelector((state) => state[Actions.user].authorizationStatus);
 
   const city = useAppSelector((state) => state[Actions.city].city);
 
@@ -46,24 +51,6 @@ export const Offer: FC = (): JSX.Element => {
   const reviews = useAppSelector((state) => state[Actions.comment].comments);
 
   const isCommentsDataLoading = useAppSelector((state) => state[Actions.comment].isCommentsDataLoading);
-
-  /**
-  * Дабавление в изабранное.
-  */
-  const onFavoriteClick = () => {
-    dispatch(
-      changeFavorite({
-        offerId: String(id),
-        favoriteStatus: !offer?.isFavorite,
-      }),
-    ).then(() => {
-      if (!id) {
-        return;
-      }
-
-      dispatch(fetchOffer(id));
-    });
-  };
 
   /**
    * Эффектит загрузку данных предложения.
@@ -114,12 +101,33 @@ export const Offer: FC = (): JSX.Element => {
   }, [dispatch, id, offer]);
 
   /**
-   * Обработчик клика на предложение.
-   * @param {IOffer} selectItem - Выбранное предложение.
+   * Обработчик нажатия на кнопку "To bookmark".
+   * @param {React.MouseEvent<HTMLButtonElement>} event - Событие.
    * @returns void.
    */
-  const onClickOffer = (selectItem: IOffer | null) => {
-    setSelectedPoint(selectItem);
+  const handleFavouriteClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+
+    onFavouriteClick(String(offer?.id), offer?.isFavorite);
+
+    if (!id) {
+      return;
+    }
+
+    dispatch(fetchOffer(id));
+  };
+
+  /**
+   * Проверка кол-ва изображений.
+   * @param {string[]} images - Изображения.
+   * @returns {string[]}
+   */
+  const checkImages = (images: string[]): string[] => {
+    if (images.length <= 6) {
+      return images;
+    }
+
+    return images.slice(0, 5);
   };
 
   /**
@@ -128,7 +136,7 @@ export const Offer: FC = (): JSX.Element => {
   const nearOffersData = useMemo(() => isOffersDataLoading !== LoadingStatus.Success || !nearOffers ? (
     <Spinner />
   ) : (
-    <OffersList offers={nearOffers} selectOffer={onClickOffer} offerPage={String(offer?.id)} isNearPlaces />
+    <OffersList offers={nearOffers} offerPage={String(offer?.id)} isNearPlaces />
   ), [isOffersDataLoading, nearOffers, offer]);
 
   if (!id || (isOfferDataLoading === LoadingStatus.Failure && !offer)) {
@@ -137,12 +145,12 @@ export const Offer: FC = (): JSX.Element => {
 
   return (
     <div className="page">
-      <Header />
+      <Header isAuthorized={isAuthorized} />
       <main className="page__main page__main--offer">
-        <section className="offer">
-          <div className="offer__gallery-container container">
+        <section className="offer" data-testid="offer-info">
+          <div className="offer__gallery-container container" data-testid="offer-gallery">
             <div className="offer__gallery">
-              {offer?.images?.map((image) => (
+              {offer?.images && checkImages(offer?.images).map((image) => (
                 <div className="offer__image-wrapper" key={image}>
                   <img className="offer__image" src={image} alt="Photo studio" />
                 </div>
@@ -161,7 +169,12 @@ export const Offer: FC = (): JSX.Element => {
                   {offer?.title}
                 </h1>
                 {isAuthorized &&
-                  <button className={classNames('offer__bookmark-button', 'button', offer?.isFavorite ? 'offer__bookmark-button--active' : '')} type="button" onClick={onFavoriteClick}>
+                  <button
+                    className={classNames('offer__bookmark-button', 'button', offer?.isFavorite ? 'offer__bookmark-button--active' : '')}
+                    type="button"
+                    onClick={handleFavouriteClick}
+                    data-testid="favourite-button"
+                  >
                     <svg className="offer__bookmark-icon" width="31" height="33">
                       <use xlinkHref="#icon-bookmark"></use>
                     </svg>
@@ -174,10 +187,10 @@ export const Offer: FC = (): JSX.Element => {
                   {offer?.type}
                 </li>
                 <li className="offer__feature offer__feature--bedrooms">
-                  {offer?.bedrooms} Bedrooms
+                  {offer?.bedrooms === 1 ? `${offer?.bedrooms} Bedroom` : `${offer?.bedrooms} Bedrooms`}
                 </li>
                 <li className="offer__feature offer__feature--adults">
-                  Max {offer?.maxAdults} adults
+                  {offer?.maxAdults === 1 ? `Max ${offer?.maxAdults} adult` : `Max ${offer?.maxAdults} adults`}
                 </li>
               </ul>
               <div className="offer__price">
@@ -187,14 +200,14 @@ export const Offer: FC = (): JSX.Element => {
               <div className="offer__inside">
                 <h2 className="offer__inside-title">What&apos;s inside</h2>
                 <ul className="offer__inside-list">
-                  {offer?.goods.map((good) => (
+                  {offer?.goods && offer?.goods.map((good) => (
                     <li className="offer__inside-item" key={good}>
                       {good}
                     </li>
                   ))}
                 </ul>
               </div>
-              <div className="offer__host">
+              <div className="offer__host" data-testid="host-info">
                 <h2 className="offer__host-title">Meet the host</h2>
                 <div className="offer__host-user user">
                   <div className="offer__avatar-wrapper offer__avatar-wrapper--pro user__avatar-wrapper">
@@ -213,7 +226,7 @@ export const Offer: FC = (): JSX.Element => {
                   <p className="offer__text">{offer?.description}</p>
                 </div>
               </div>
-              <section className="offer__reviews reviews">
+              <section className="offer__reviews reviews" data-testid="reviews">
                 {isCommentsDataLoading !== LoadingStatus.Success || !reviews ? (
                   <Spinner />
                 ) : (
@@ -222,12 +235,12 @@ export const Offer: FC = (): JSX.Element => {
               </section>
             </div>
           </div>
-          <section className="offer__map map">
-            <Map currentCity={city} offers={nearOffers} selectedOffer={selectedOffer} />
+          <section className="offer__map map" data-testid="map">
+            <Map currentCity={city} offers={nearOffers} />
           </section>
         </section>
         <div className="container">
-          <section className="near-places places">
+          <section className="near-places places" data-testid="nearby-places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
             <div className="near-places__list places__list">
               {nearOffersData}
