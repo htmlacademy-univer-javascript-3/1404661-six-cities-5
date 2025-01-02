@@ -1,7 +1,7 @@
 import { createReducer } from '@reduxjs/toolkit';
 
 import { IOfferFull } from '../../interfaces/offer-full.interface';
-import { LoadingStatus } from '../../emuns/statuses.enum';
+import { LoadingStatus } from '../../emuns/loading-statuses.enum';
 
 import { clearOffer, setOffer, setOfferLoadingStatus } from '../actions';
 

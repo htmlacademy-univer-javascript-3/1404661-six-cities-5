@@ -1,7 +1,7 @@
 import { IOffer } from '../../interfaces/offer.interface';
 
 import { PlacementTypes } from '../../emuns/plecement-types.enum';
-import { LoadingStatus } from '../../emuns/statuses.enum';
+import { LoadingStatus } from '../../emuns/loading-statuses.enum';
 
 import { setFavorites, setFavoritesLoadingStatus } from '../actions';
 import { favoritesReducer } from '../reducers/favorites-reducer';

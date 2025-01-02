@@ -6,7 +6,7 @@ import { IUserFull } from '../interfaces/user.inretface';
 import { IOfferFull } from '../interfaces/offer-full.interface';
 import { IComment } from '../interfaces/comment.interface';
 import { Actions } from '../emuns/actions.enum';
-import { LoadingStatus } from '../emuns/statuses.enum';
+import { LoadingStatus } from '../emuns/loading-statuses.enum';
 
 /** Изменение города. */
 export const changeCity = createAction<ICity>(`${Actions.city}/change`);

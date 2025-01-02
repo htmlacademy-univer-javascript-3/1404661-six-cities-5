@@ -2,7 +2,7 @@ import { IOffer } from '../interfaces/offer.interface';
 import { ICity } from '../interfaces/city.interface';
 import { IUserFull } from '../interfaces/user.inretface';
 import { IOfferFull } from '../interfaces/offer-full.interface';
-import { LoadingStatus } from '../emuns/statuses.enum';
+import { LoadingStatus } from '../emuns/loading-statuses.enum';
 import { IComment } from '../interfaces/comment.interface';
 
 /**

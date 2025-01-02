@@ -1,6 +1,6 @@
 import { IOfferFull } from '../../interfaces/offer-full.interface';
 import { PlacementTypes } from '../../emuns/plecement-types.enum';
-import { LoadingStatus } from '../../emuns/statuses.enum';
+import { LoadingStatus } from '../../emuns/loading-statuses.enum';
 
 import { clearOffer, setOffer } from '../actions';
 import { offerReducer } from '../reducers/offer-reducer';

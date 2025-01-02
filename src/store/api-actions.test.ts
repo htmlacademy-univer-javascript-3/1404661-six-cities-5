@@ -1,6 +1,6 @@
 import { Actions } from '../emuns/actions.enum';
 import { PlacementTypes } from '../emuns/plecement-types.enum';
-import { LoadingStatus } from '../emuns/statuses.enum';
+import { LoadingStatus } from '../emuns/loading-statuses.enum';
 
 import { initActionsStore } from '../mocks/actions-store';
 import {

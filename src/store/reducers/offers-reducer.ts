@@ -1,10 +1,9 @@
 import { createReducer } from '@reduxjs/toolkit';
 
 import { IOffer } from '../../interfaces/offer.interface';
-import { LoadingStatus } from '../../emuns/statuses.enum';
+import { LoadingStatus } from '../../emuns/loading-statuses.enum';
 
 import { clearNearbyOffers, getOffers, setNearbyOffers, setOffersLoadingStatus } from '../actions';
-
 
 interface OffersState {
   offers: IOffer[];

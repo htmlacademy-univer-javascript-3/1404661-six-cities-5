@@ -1,10 +1,9 @@
 import { IOffer } from '../../interfaces/offer.interface';
 import { PlacementTypes } from '../../emuns/plecement-types.enum';
-import { LoadingStatus } from '../../emuns/statuses.enum';
+import { LoadingStatus } from '../../emuns/loading-statuses.enum';
 
 import { clearNearbyOffers, getOffers, setNearbyOffers, setOffersLoadingStatus } from '../actions';
 import { offersReducer } from '../reducers/offers-reducer';
-
 
 describe('offersReducer', () => {
   const initialState = {

@@ -2,7 +2,7 @@ import { ICity } from '../../interfaces/city.interface';
 
 import { CITIES } from '../../constants/cities';
 import { changeCity } from '../actions';
-import { cityReducer } from '../reducers/city-reducer';
+import { cityReducer } from './city-reducer';
 
 describe('cityReducer', () => {
   const initialState = {
