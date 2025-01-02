@@ -128,3 +128,5 @@ export const Main: FC<IMainProps> = ({ isAuthorized }): JSX.Element => {
     </div>
   );
 };
+
+export default Main;
