@@ -14,7 +14,7 @@ import { Actions } from '../../emuns/actions.enum';
 import { useAppSelector } from '../../store/hooks';
 import { FilterTypes } from '../../emuns/filter-types.enum';
 
-import './Main.css';
+import './main.css';
 
 /**
  * Интерфейс компонента главной страницы.
