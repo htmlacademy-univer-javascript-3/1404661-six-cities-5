@@ -11,9 +11,9 @@ vi.mock('../rating/rating', () => ({
   Rating: () => <div data-testid="rating" />,
 }));
 
-vi.mock('../../../helpers/dates.helper', () => ({
-  dateToYearMonthDay: vi.fn(),
-  dateToMonthWordYear: vi.fn(),
+vi.mock('../../../helpers/convert-dates.helper', () => ({
+  convertDateToYearMonthDay: vi.fn(),
+  convertDateToMonthWordYear: vi.fn(),
 }));
 
 describe('ReviewItem', () => {

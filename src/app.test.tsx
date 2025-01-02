@@ -4,13 +4,13 @@ import { MemoryHistory, createMemoryHistory } from 'history';
 
 import { App } from './app.tsx';
 
-import { AppRoute } from '../emuns/app-route.emun.ts';
-import { LoadingStatus } from '../emuns/loading-statuses.enum.ts';
-import { PlacementTypes } from '../emuns/plecement-types.enum.ts';
+import { AppRoute } from './emuns/app-route.emun.ts';
+import { PlacementTypes } from './emuns/plecement-types.enum.ts';
+import { LoadingStatus } from './emuns/loading-statuses.enum.ts';
 
-import { makeFakeStore } from '../utils/mock-store.ts';
-import { withHistory, withStore } from '../utils/mock-components.tsx';
-import { mockUser } from '../mocks/mock-store-data.ts';
+import { withHistory, withStore } from './utils/mock-components.tsx';
+import { makeFakeStore } from './utils/mock-store.ts';
+import { mockUser } from './mocks/mock-store-data.ts';
 
 describe('App', () => {
   let mockHistory: MemoryHistory;

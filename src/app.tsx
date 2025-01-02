@@ -1,17 +1,17 @@
 import { Route, Routes } from 'react-router-dom';
 
-import { Main } from '../pages/main/main';
-import { Login } from '../pages/login/login';
-import { Favorites } from '../pages/favorites/favorites';
-import { Offer } from '../pages/offer/offer';
-import { Error } from '../pages/error/error';
-import { PrivateRoute } from '../components/molecules/private-route/private-route';
+import { Main } from './pages/main/main';
+import { Login } from './pages/login/login';
+import { Favorites } from './pages/favorites/favorites';
+import { Offer } from './pages/offer/offer';
+import { Error } from './pages/error/error';
+import { PrivateRoute } from './components/molecules/private-route/private-route';
 
-import { AppRoute } from '../emuns/app-route.emun';
-import { Actions } from '../emuns/actions.enum';
+import { AppRoute } from './emuns/app-route.emun';
+import { Actions } from './emuns/actions.enum';
 
-import { useAppDispatch, useAppSelector } from '../store/hooks';
-import { changeFavorite, fetchOffer } from '../store/api-actions';
+import { useAppDispatch, useAppSelector } from './store/hooks';
+import { changeFavorite, fetchOffer } from './store/api-actions';
 
 /**
  * Компонент приложения.

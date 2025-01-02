@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 
-import { App } from './app/app.tsx';
+import { App } from './app.tsx';
 
 import { fetchOffers, userCheckAuth } from './store/api-actions.ts';
 import { store } from './store';
