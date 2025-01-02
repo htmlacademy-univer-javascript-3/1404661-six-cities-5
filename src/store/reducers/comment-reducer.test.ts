@@ -4,7 +4,6 @@ import { LoadingStatus } from '../../emuns/statuses.enum';
 import { clearComments, setComments, setCommentsLoadingStatus } from '../actions';
 import { commentsReducer } from '../reducers/comment-reducer';
 
-
 describe('commentsReducer', () => {
   const initialState = {
     comments: [],

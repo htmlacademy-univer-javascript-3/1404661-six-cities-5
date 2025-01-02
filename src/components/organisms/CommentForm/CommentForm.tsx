@@ -7,16 +7,16 @@ import { IForm } from '../../../interfaces/form.interface';
  * Интерфейс компонента формы создания комментария.
  * @prop {(form: IForm) => void} onSubmit - Функция отправки данных.
  */
-interface ICommentForm {
+interface ICommentFormProps {
   onSubmit: (form: IForm) => void;
 }
 
 /**
  * Компонент формы создания комментария.
- * @param {ICommentForm} params - Входные парамтеры компонента.
+ * @param {ICommentFormProps} params - Входные парамтеры компонента.
  * @returns {JSX.Element}
  */
-export const CommentForm: FC<ICommentForm> = ({ onSubmit: submit }): JSX.Element => {
+export const CommentForm: FC<ICommentFormProps> = ({ onSubmit: submit }): JSX.Element => {
   const [form, setForm] = useState<IForm>({ comment: '', rating: 0 });
 
   /** Звездочки. */
@@ -81,7 +81,7 @@ export const CommentForm: FC<ICommentForm> = ({ onSubmit: submit }): JSX.Element
   };
 
   return (
-    <form className="reviews__form form" onSubmit={handleSubmit} method="post">
+    <form className="reviews__form form" onSubmit={handleSubmit} method="post" data-testid="review-form">
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">
         {RATING.map((item) => {

@@ -4,7 +4,8 @@
  * @member Places.Room - Комната.
  */
 export enum PlacementTypes {
-  Apartment = 'Apartment',
-  Room = 'Room',
-  House = 'House'
+  Apartment = 'apartment',
+  Room = 'room',
+  House = 'house',
+  Hotel = 'hotel'
 }

@@ -15,8 +15,8 @@ vi.mock('../Rating/ReviewRating', () => ({
   ),
 }));
 
-describe('ReviewForm', () => {
-  it('should render correctly', () => {
+describe('CommentForm', () => {
+  it('should render CommentForm correctly', () => {
     render(<CommentForm onSubmit={vi.fn()} />);
 
     expect(screen.getByLabelText(/Your review/i)).toBeInTheDocument();

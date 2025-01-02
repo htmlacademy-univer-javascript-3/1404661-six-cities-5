@@ -15,7 +15,7 @@ export const CityList = (): JSX.Element => {
   const dispatch = useAppDispatch();
 
   return (
-    <ul className="locations__list tabs__list">
+    <ul className="locations__list tabs__list" data-testid="city-list">
       {
         Object.entries(CITIES).map(([key, item]) => (
           <li key={key} className="locations__item">

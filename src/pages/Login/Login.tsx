@@ -1,23 +1,27 @@
 import { FC, FormEventHandler } from 'react';
-import { Navigate } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 
-import { Header } from '../components/molecules/Header/Header';
+import { ILogin } from '../../interfaces/login.interface';
+import { AppRoute } from '../../emuns/app-route.emun';
 
-import { ILogin } from '../interfaces/login.interface';
-import { AppRoute } from '../emuns/app-route.emun';
-import { Actions } from '../emuns/actions.enum';
+import { userLogin } from '../../store/api-actions';
+import { useAppDispatch } from '../../store/hooks';
 
-import { userLogin } from '../store/api-actions';
-import { useAppDispatch, useAppSelector } from '../store/hooks';
+/**
+ * Интерфейс компонента страницы логина.
+ * @prop {boolean} isAuthorized -  Авторизован ли пользователь?
+ */
+interface ILoginProps {
+  isAuthorized: boolean;
+}
 
 /**
  * Компонент страницы логина.
+ * @param {ILoginProps} params - Входные парамтеры компонента.
  * @returns {JSX.Element}
  */
-export const Login: FC = (): JSX.Element => {
+export const Login: FC<ILoginProps> = ({ isAuthorized }): JSX.Element => {
   const dispatch = useAppDispatch();
-
-  const isAuthorized = useAppSelector((state) => state[Actions.user].authorizationStatus);
 
   /**
    * Отправка данных формы авторизации.
@@ -51,8 +55,17 @@ export const Login: FC = (): JSX.Element => {
 
   return (
     <div className="page page--gray page--login">
-      <Header />
-
+      <header className="header">
+        <div className="container">
+          <div className="header__wrapper">
+            <div className="header__left">
+              <Link to={AppRoute.Main}>
+                <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41" />
+              </Link>
+            </div>
+          </div>
+        </div>
+      </header>
       <main className="page__main page__main--login">
         <div className="page__login-container container">
           <section className="login">
@@ -61,14 +74,15 @@ export const Login: FC = (): JSX.Element => {
               className="login__form form"
               method="post"
               onSubmit={handleSubmit}
+              data-testid="login-form"
             >
               <div className="login__input-wrapper form__input-wrapper">
                 <label className="visually-hidden">E-mail</label>
-                <input className="login__input form__input" type="email" name="email" placeholder="Email" required />
+                <input className="login__input form__input" type="email" name="email" placeholder="Email" data-testid="emailElement" required />
               </div>
               <div className="login__input-wrapper form__input-wrapper">
                 <label className="visually-hidden">Password</label>
-                <input className="login__input form__input" type="password" name="password" placeholder="Password" required />
+                <input className="login__input form__input" type="password" name="password" placeholder="Password" data-testid="passwordElement" required />
               </div>
               <button className="login__submit form__submit button" type="submit">Sign in</button>
             </form>
